@@ -7,6 +7,16 @@ const Model = use('Model')
 const Hash = use('Hash')
 
 class User extends Model {
+  
+    sectors() {
+      return this
+      .belongsToMany(
+        'App/Models/Sector',
+        'user_id',
+        'sector_id')
+      .pivotTable('user_sectors')
+  }
+
   static boot () {
     super.boot()
 
