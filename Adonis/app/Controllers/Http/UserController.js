@@ -7,17 +7,19 @@ const Sector = use('App/Models/Sector')
 class UserController {
 
     async register({ request }) {
-        const { sectors } = request.all()
-        const sectors_ids = []
-        
-        const setor1 = await Sector.findBy('name', 'Necropsias')
-        const setor2 = await Sector.findBy('name', 'Ánalises laboratoriais')
-        const setores = [setor1.id, setor2.id]
+      const { sectors } = request.all()
+
+      const sectors_ids = []
+      
+      for (let i = 0; i < sectors.length; i++) {
+        const sec = await Sector.findBy('name', sectors[i]) // Pegando o setor no banco de dados
+        sectors_ids.push(sec.id) // colocando o id do setor no array
+      }
       
         const data = request.only(['username', 'email', 'password'])
 
         const user = await User.create(data)
-        user.sectors().attach(setores)
+        user.sectors().attach(sectors_ids)
 
         return user
     }

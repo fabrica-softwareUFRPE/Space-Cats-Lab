@@ -28,5 +28,7 @@ Route.get('users/:id', 'UserController.show')
 
 Route.post('sectors/register', 'SectorController.register')
 
+Route.get('sectors/index', 'SectorController.index')
+
 
 

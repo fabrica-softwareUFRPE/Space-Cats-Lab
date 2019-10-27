@@ -10,6 +10,7 @@ class SectorController {
 
         return sector
     }
+
 }
 
 module.exports = SectorController
