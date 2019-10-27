@@ -15,12 +15,34 @@ export default function Login() {
     return (
         <div className="page">
             <div className="login-container">
-                <form></form>
-                <div className="overlay"></div>
+                <form>
+                    <div className="logo">
+                        <img src={logo} alt="Logo"/>
+                    </div>
+                    <div className="inputs">
+                    <Grid container spacing={1} alignItems="flex-end">
+                        <Grid item>
+                            <AccountCircleOutlinedIcon/>
+                        </Grid>
+                        <Grid item>
+                            <TextField id="input-login" label="Digite seu email" margin="normal"/>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={1} alignItems="flex-end">
+                        <Grid item>
+                            <LockOutlinedIcon/>
+                        </Grid>
+                        <Grid item>
+                            <TextField type="password" id="input-senha" label="Digite sua senha" margin="normal"/>
+                        </Grid>
+                    </Grid>
+                    </div>
+                    <button>Entrar</button>
+                </form>
             </div>
             
             <footer className="rodape">
-                <p>Copyright &copy; 2019, Space Cats Lab</p>
+                <p>&copy; 2019, Space Cats Lab</p>
             </footer>
         </div>
     );
