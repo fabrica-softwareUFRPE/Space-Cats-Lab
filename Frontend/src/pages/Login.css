@@ -8,6 +8,7 @@ body {
     display: flex;
     position: absolute;
     background-image: url("..//assets/bgLogin.svg");
+    background-size: cover;
     justify-content: center;
     align-items: center;
     padding: 0px;
@@ -16,8 +17,8 @@ body {
 .login-container form {
     height: 100%;
     width: 100%;
-    max-width: 200px;
-    max-height: 275px;
+    max-width: 400px;
+    max-height: 550px;
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.752);
