@@ -3,23 +3,19 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class UserSectorSchema extends Schema {
+class UserSetoresSchema extends Schema {
   up () {
-    this.create('user_sectors', (table) => {
-      table.increments()
-      table
-        .integer('user_id')
-        .notNullable()
-      table
-        .integer('sector_id')
-        .notNullable()  
+    this.create('user_setores', (table) => { // relaciona os usuários com seus setores, relação 1 x N
+      table.increments() // chave primária 'id'
+      table.string('user_id').references('id').inTable('users') 
+      table.integer('setor_id').unsigned().references('id').inTable('setores') // unsigned() é essencial
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('user_sectors')
+    this.drop('user_setores')
   }
 }
 
-module.exports = UserSectorSchema
+module.exports = UserSetoresSchema
