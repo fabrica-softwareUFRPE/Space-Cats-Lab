@@ -22,13 +22,13 @@ Route.post('/login', 'SessionController.login')
 
 Route.get('users', 'UserController.indexUsers')
 
-Route.get('users/sectors/:id', 'UserController.indexSectorsOfUser')
+Route.get('users/setores/:id', 'UserController.indexSectorsOfUser')
 
 Route.get('users/:id', 'UserController.show')
 
-Route.post('sectors/register', 'SectorController.register')
+Route.post('setores/register', 'SectorController.register')
 
-Route.get('sectors/index', 'SectorController.index')
+Route.get('setores/index', 'SectorController.index')
 
 
 

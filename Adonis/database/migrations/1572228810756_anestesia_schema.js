@@ -16,8 +16,11 @@ class AnestesiaSchema extends Schema {
       table.string('tipoAnimal', 80).notNullable() 
       table
         .integer('setor_id')
+        .unsigned()
         .notNullable()
         .unique()
+        //.references('id')
+        //.inTable('setores')
     })
   }
 

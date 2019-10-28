@@ -16,8 +16,11 @@ class AnalisesSchema extends Schema {
       table.string('tipoAnalise', 80).notNullable() // Tipo da analise: Bacteriose, parasita ...
       table
         .integer('setor_id')
-        .notNullable()
         .unique()
+        .unsigned()
+        .notNullable()
+        //.references('id')
+        //.inTable('setores')
     })
   }
 

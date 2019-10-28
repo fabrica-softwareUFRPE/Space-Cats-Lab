@@ -1,14 +1,14 @@
 'use strict'
 
-const Sector = use('App/Models/Sector')
+const Setor = use('App/Models/Setor')
 
 class SectorController {
     async register({ request }) {
-        const data = request.only(['name'])
+        const data = request.only(['nome'])
 
-        const sector = await Sector.create(data)
+        const setor = await Setor.create(data)
 
-        return sector
+        return setor
     }
 
 }

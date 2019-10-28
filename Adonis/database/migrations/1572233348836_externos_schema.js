@@ -7,15 +7,19 @@ class ExternosSchema extends Schema {
   up () {
     this.create('externos', (table) => {
       table.increments()
-      table.string('data').notNullabe()
-      table.string('ficha',11).notNullabe()
-      table.string('propriedade').notNullabe()
-      table.string('distProp').notNullabe()
-      table.string('tipoAtend').notNullabe()
+      table.string('data').notNullable()
+      table.string('ficha',11).notNullable()
+      table.string('propriedade').notNullable()
+      table.string('distProp').notNullable()
+      table.string('tipoAtend').notNullable()
       table
         .integer('setor_id')
-        .notNullabe()
+        .unsigned()
+        .notNullable()
         .unique()
+        //.references('id')
+        //.inTable('setores')
+
     })
   }
 

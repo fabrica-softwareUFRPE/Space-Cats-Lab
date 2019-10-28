@@ -7,17 +7,20 @@ class DiagnosticosSchema extends Schema {
   up () {
     this.create('diagnosticos', (table) => {
       table.increments()
-      table.string('data').notNullabe()
-      table.string('ficha',11).notNullabe()
-      table.string('nome',80).notNullabe()
-      table.string('especie',80).notNullabe()
-      table.string('exame').notNullabe()
-      table.string('quantSimples').notNullabe()
-      table.string('quantComplexo').notNullabe()
+      table.string('data').notNullable()
+      table.string('ficha',11).notNullable()
+      table.string('nome',80).notNullable()
+      table.string('especie',80).notNullable()
+      table.string('exame').notNullable()
+      table.string('quantSimples').notNullable()
+      table.string('quantComplexo').notNullable()
       table
         .integer('setor_id')
-        .notNullabe()
+        .unsigned()
+        .notNullable()
         .unique()
+        //.references('id')
+        //.inTable('setores')
     })
   }
 

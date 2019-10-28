@@ -15,9 +15,10 @@ class NecropsiasSchema extends Schema {
       table
         .integer('setor_id')
         .unique()
+        .unsigned()
         .notNullable()
-        //.references('id')
-        //.inTable('sectors')
+       // .references('id')
+       // .inTable('setores')
     })
   }
 

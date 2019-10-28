@@ -6,7 +6,7 @@ const Schema = use('Schema')
 class UserSchema extends Schema {
   up () {
     this.create('users', (table) => {
-      table.string('id', 11).primary() // será o cpf 
+      table.string('id', 11).unique().primary() // será o cpf 
       table.string('username', 80).notNullable() // nome completo do usuário.
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()

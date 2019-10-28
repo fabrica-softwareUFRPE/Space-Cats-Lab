@@ -1,31 +1,31 @@
 'use strict'
 
 const User = use('App/Models/User')
-const Sector = use('App/Models/Sector')
+const Setor = use('App/Models/Setor')
 //const Database = use('Database')
 
 class UserController {
 
     async register({ request }) {
-      const { sectors } = request.all()
+      const { setores } = request.all()
 
-      const sectors_ids = []
+      const setores_ids = []
       
-      for (let i = 0; i < sectors.length; i++) {
-        const sec = await Sector.findBy('name', sectors[i]) // Pegando o setor no banco de dados
-        sectors_ids.push(sec.id) // colocando o id do setor no array
+      for (let i = 0; i < setores.length; i++) {
+        const set = await Setor.findBy('nome', setores[i]) // Pegando o setor no banco de dados
+        setores_ids.push(set.id) // colocando o id do setor no array
       }
       
-        const data = request.only(['username', 'email', 'password'])
+        const data = request.only(['username', 'email', 'password', 'id'])
 
         const user = await User.create(data)
-        user.sectors().attach(sectors_ids)
+        user.setores().attach(setores_ids)
 
         return user
     }
 
     async indexUsers() {
-      const users = await User.query().with('sectors').fetch()
+      const users = await User.query().with('setores').fetch()
 
       return users
     }
@@ -33,15 +33,15 @@ class UserController {
     async indexSectorsOfUser({ params }) {
       const user = await User.findOrFail(params.id) // capturando usuário
 
-      const sectors = await user.sectors().fetch() // capturando os setores do usuário
+      const setores = await user.setores().fetch() // capturando os setores do usuário
 
-      return sectors
+      return setores
     }
 
     async show({ params }) {
       const user = await User.findOrFail(params.id)
 
-      await user.loadMany(['sectors'])
+      await user.loadMany(['setores'])
 
       return user
     }

@@ -3,16 +3,20 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class Sector extends Model {
-    
-    users() {
+class Setor extends Model {
+    static get table () {
+        return 'setores'
+      }
+
+      users() {
         return this
         .belongsToMany(
             'App/Models/User',
-            'sector_id',
+            'setor_id',
             'user_id')
-        .pivotTable('user_sectors')
+        .pivotTable('user_setores')
     }
+    
 }
 
-module.exports = Sector
+module.exports = Setor
