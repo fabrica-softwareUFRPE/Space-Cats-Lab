@@ -20,22 +20,22 @@ export default function Login() {
                         <img src={logo} alt="Logo"/>
                     </div>
                     <div className="inputs">
-                    <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <AccountCircleOutlinedIcon/>
+                        <Grid container id="grid1" spacing={1} alignItems="flex-end">
+                            <Grid item>
+                                <AccountCircleOutlinedIcon id="icon1"/>
+                            </Grid>
+                            <Grid item>
+                                <TextField id="input-login" label="Digite seu email" margin="normal"/>
+                            </Grid>
                         </Grid>
-                        <Grid item>
-                            <TextField id="input-login" label="Digite seu email" margin="normal"/>
+                        <Grid container id="grid2" spacing={1} alignItems="flex-end">
+                            <Grid item> 
+                                <LockOutlinedIcon id="icon2"/>
+                            </Grid>
+                            <Grid item>
+                                <TextField type="password" id="input-senha" label="Digite sua senha" margin="normal"/>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container spacing={1} alignItems="flex-end">
-                        <Grid item>
-                            <LockOutlinedIcon/>
-                        </Grid>
-                        <Grid item>
-                            <TextField type="password" id="input-senha" label="Digite sua senha" margin="normal"/>
-                        </Grid>
-                    </Grid>
                     </div>
                     <button>Entrar</button>
                 </form>
