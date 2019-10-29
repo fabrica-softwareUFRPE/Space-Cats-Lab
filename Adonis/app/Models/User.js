@@ -12,6 +12,10 @@ class User extends Model {
       return 'id'
     }
 
+    static get incrementing () {
+      return false
+    }
+
   
     setores() {
       return this
