@@ -10,12 +10,18 @@ class UserSchema extends Schema {
       table.string('username', 80).notNullable() // nome completo do usuário.
       table.string('email', 254).notNullable().unique() 
       table.string('password', 60).notNullable()
-      table.string('nivel').notNullable().defaultTo(1) // administrador, supervisor, basico
-      table.date('criado_em').notNullable() // data do cadastro
-      table.string('criado_por', 11) // cpf de quem criou
-      table.date('atualizado_em') // data em que algum valor da linha foi alterado
+      table.string('nivel').notNullable().defaultTo('basico') // administrador, supervisor, basico
+      
+      // o setor do usuário fica na tabela user_setores
+      
+      // para rastrear a autoria
+      table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
+      table.date('criado_em').notNullable() // data da inserção
+      table.string('atualizado_por').references('id').inTable('users') // data em que algum valor da linha foi alterado
+      table.date('atualizado_em') // data em que algum valor da linha foi alterado // notNullable() não foi inserido de propósito
+      
       table.string('status') // ativo, inativo...
-      // o setor do usuário fica na tabela user_setores*/
+
     })
   }
 

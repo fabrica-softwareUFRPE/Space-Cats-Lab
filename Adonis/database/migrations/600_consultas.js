@@ -7,13 +7,17 @@ class ConsultasSchema extends Schema {
   up () {
     this.create('consultas', (table) => { 
       table.increments()
+      table.date('data_proc').notNullable() // a data do procedimento
       table.string('animal_id', 11).notNullable() // id_animal será inserido pelo usuário. Não temos cadastro de pacientes
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 40).notNullable() // vários valores
       table.string('area', 40).notNullable() // vários valores
       table.boolean('retorno', 3).notNullable() // recebe a string: sim/não
-      table.string('tipoProc', 8).notNullable() // simples ou complexo
+      table.string('tipo_proc', 8).notNullable() // simples ou complexo
+      
       table.string('tipoAnimal', 20).notNullable() // recebe a string: grande, pequeno ou silvestre
+      
+      // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
       table.date('criado_em').notNullable() // data da inserção
       table.string('atualizado_por').references('id').inTable('users') // data em que algum valor da linha foi alterado

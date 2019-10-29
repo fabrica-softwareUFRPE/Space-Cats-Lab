@@ -3,24 +3,30 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
+// São 5 setores de análises laboratoriais. Devido a terem uma estrutura semenhante, vão estar na mesma tabela
+// uma chave estrangeira vai diferenciá-los.
+
 class AnalisesSchema extends Schema {
   up () {
     this.create('analises', (table) => {
       table.increments()
-      table.string('data').notNullable()
-      table.string('ficha', 11).notNullable() // número identificador do animal
+      table.date('data_proc').notNullable() // a data do procedimento
+      table.string('animal_id', 11).notNullable() // número identificador do animal
       table.string('nome', 80).notNullable()
       table.string('especie', 80).notNullable()
-      table.string('procedimento', 80).notNullable() // procedimento laboratorial
-      table.string('tipoProc', 80).notNullable() // procedimento simples ou complexo
-      table.string('tipoAnalise', 80).notNullable() // Tipo da analise: Bacteriose, parasita ...
-      table
-        .integer('setor_id')
-        .unique()
-        .unsigned()
-        .notNullable()
-        //.references('id')
-        //.inTable('setores')
+     // os procedimentos laboratoriais estão na tabela tipos_proc_lab por ser atributo multivalorado
+      table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
+      table.string('quant_cmplexos', 40).notNullable() // quantidade de procedimentos complexos
+      
+      table.string('tipo_animal', 20).notNullable() // recebe a string: grande, pequeno ou silvestre
+
+      table.integer('setor_id').unsigned().references('id').inTable('setores') // chave estrangeira identifica o setor: Bacteriose, parasita ...
+
+      // para rastrear a autoria
+      table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
+      table.date('criado_em').notNullable() // data da inserção
+      table.string('atualizado_por').references('id').inTable('users') // data em que algum valor da linha foi alterado
+      table.date('atualizado_em') // data em que algum valor da linha foi alterado // notNullable() não foi inserido de propósito
     })
   }
 
