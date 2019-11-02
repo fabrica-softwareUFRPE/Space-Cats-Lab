@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React, { } from 'react';
+import React, { useState } from 'react';
 import './LoginTest.css';
 import logo from '../assets/logo.png'
 import TextField from '@material-ui/core/TextField';
@@ -12,10 +12,23 @@ import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 
 export default function Login() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    function handleSubmit (e) {
+        e.preventDefault();
+
+        if(username === '' || password === ''){
+            console.log("Informações incompletas.")
+        } else {
+            console.log(username, password);
+        }
+    }
+
     return (
         <div className="page">
             <div className="login-container">
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="logo">
                         <img src={logo} alt="Logo"/>
                     </div>
@@ -25,7 +38,13 @@ export default function Login() {
                                 <AccountCircleOutlinedIcon id="icon1"/>
                             </Grid>
                             <Grid item>
-                                <TextField id="input-login" label="Digite seu email" margin="normal"/>
+                                <TextField 
+                                    id="input-login" 
+                                    label="Digite seu email" 
+                                    margin="normal"
+                                    value={username}
+                                    onChange={e => setUsername(e.target.value)}
+                                />
                             </Grid>
                         </Grid>
                         <Grid container id="grid2" spacing={1} alignItems="flex-end">
@@ -33,7 +52,14 @@ export default function Login() {
                                 <LockOutlinedIcon id="icon2"/>
                             </Grid>
                             <Grid item>
-                                <TextField type="password" id="input-senha" label="Digite sua senha" margin="normal"/>
+                                <TextField 
+                                    type="password" 
+                                    id="input-senha" 
+                                    label="Digite sua senha" 
+                                    margin="normal"
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                />
                             </Grid>
                         </Grid>
                     </div>
