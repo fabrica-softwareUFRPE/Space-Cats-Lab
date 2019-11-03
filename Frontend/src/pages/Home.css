@@ -24,7 +24,7 @@ body {
     font-size: 1vw;
 }
 
-#exitButton {
+.pageHome .sideBar #exitButton {
     padding: 0.8vh;
     border: 0;
     border-radius: 3px;
@@ -36,9 +36,9 @@ body {
     align-items: center;
 }
 
-.pageHome .headDiv {
+.pageHome .sideBar .headDiv {
     width: 100%;
-    height: 30vh;
+    height: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,9 +46,9 @@ body {
     color: #f5f5f5;
 }
 
-.pageHome .naviDiv {
+.pageHome .sideBar .naviDiv {
     width: 100%;
-    height: 60vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,11 +56,29 @@ body {
     color: #f5f5f5;
 }
 
-.pageHome .exitDiv {
+.pageHome .sideBar .exitDiv {
     width: 100%;
     height: 10vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.pageHome .sideBar .naviLine {
+    height: 0.11vh;
+    width: 12vw;
+    background-color: #f5f5f557;
+}
+
+.pageHome .sideBar .naviButton {
+    padding: 2.5vh;
+    border: 0;
+    width: 16vw;
+    font-size: 0.85vw;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #f5f5f5;
+    background-color: #1D5047;
+    cursor: pointer;
     align-items: center;
 }
