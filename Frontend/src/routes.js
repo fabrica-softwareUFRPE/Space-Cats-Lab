@@ -3,14 +3,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './pages/LoginTest';
 import TabelaFuncionario from './pages/TabelaAdmFunc';
-
-
+import Home from './pages/Home';
 
 export default function Routes(){
     return (
         <BrowserRouter>
-            <Route path = "/Login" exact component = {Login} />
-            <Route path = "/" component = {TabelaFuncionario} />
+            <Route path = "/" exact component = {Login} />
+            <Route path = "/home" component = {Home} />
+            <Route path = "/table" component = {TabelaFuncionario} />
         </BrowserRouter>
     );
 }

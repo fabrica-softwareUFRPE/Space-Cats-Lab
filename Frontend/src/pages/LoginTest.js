@@ -26,7 +26,7 @@ export default function Login() {
     }
 
     return (
-        <div className="page">
+        <div className="pageLogin">
             <div className="login-container">
                 <form onSubmit={handleSubmit}>
                     <div className="logo">
