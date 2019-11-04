@@ -10,31 +10,24 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import { login } from '../../index';
 
 export default function Login({ history }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const data = [
-        {user: 'admin12', senha: '1212'},
-        {user: 'teste123', senha:'123456'},
-        {user: 'dog', senha: 'cat'},
-    ];
+
+
 
     function handleSubmit (e) {
         e.preventDefault();
 
+        if(login(username, password)) {
+            history.push('/home');
+        } else {
+            alert("Usuário ou senha incorretos.");
+        }
         if(username === '' || password === ''){
             alert("Informações incompletas.");
-        } else {
-            var x = data.find(x => x.user === username);
-
-            if( x !== undefined){
-                if(password === x.senha){
-                    history.push('/home');
-                }
-            } else {
-                alert("Usuário ou senha incorretos.");
-            }
         }
     }
 
