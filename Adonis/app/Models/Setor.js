@@ -8,7 +8,15 @@ class Setor extends Model {
         return 'setores'
       }
 
-      users() {
+    static get createdAtColumn () {
+        return null
+    }  
+
+    static get updatedAtColumn () {
+        return null
+    }
+
+    users() {
         return this
         .belongsToMany(
             'App/Models/User',
