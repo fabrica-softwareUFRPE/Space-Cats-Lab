@@ -2,7 +2,11 @@
 import React from 'react';
 import './Home.css';
 
-export default function Home() {
+export default function Home( { history }) {
+    function exitFunction (e) {
+        history.push('/');
+    }
+
     return(
         <div className="pageHome">
             <div className="sideBar">
@@ -78,7 +82,7 @@ export default function Home() {
                     </ul>
                 </div>
                 <div className="exitDiv">
-                    <button id="exitButton">Sair</button>
+                    <button id="exitButton" onClick={exitFunction}>Sair</button>
                 </div>
             </div>
         </div>

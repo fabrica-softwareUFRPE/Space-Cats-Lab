@@ -11,17 +11,30 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 
-export default function Login() {
+export default function Login({ history }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const data = [
+        {user: 'admin12', senha: '1212'},
+        {user: 'teste123', senha:'123456'},
+        {user: 'dog', senha: 'cat'},
+    ];
 
     function handleSubmit (e) {
         e.preventDefault();
 
         if(username === '' || password === ''){
-            console.log("Informações incompletas.")
+            alert("Informações incompletas.");
         } else {
-            console.log(username, password);
+            var x = data.find(x => x.user === username);
+
+            if( x !== undefined){
+                if(password === x.senha){
+                    history.push('/home');
+                }
+            } else {
+                alert("Usuário ou senha incorretos.");
+            }
         }
     }
 
@@ -63,7 +76,7 @@ export default function Login() {
                             </Grid>
                         </Grid>
                     </div>
-                    <button>Entrar</button>
+                    <button type="submit">Entrar</button>
                 </form>
             </div>
             
