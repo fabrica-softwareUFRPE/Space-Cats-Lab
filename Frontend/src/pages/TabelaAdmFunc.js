@@ -105,7 +105,7 @@ export default function TabelaFuncionario() {
                 setState(prevState => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };
+                  return { ...prevState, data };  
                 });
               }
             }, 600);
