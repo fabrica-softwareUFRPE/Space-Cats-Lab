@@ -11,25 +11,71 @@ export default function Home() {
                     <p>USERNAME</p>
                 </div>
                 <div className="naviDiv">
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Gerenciar Usuários</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Consultas e Retornos</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Diagnóstico por Imagem</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Procedimentos Cirúrgicos</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Procedimentos Anestésicos</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Análises Laboratoriais</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Necropsias</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Atendimentos Externos</button>
-                    <div className="naviLine"/>
-                    <button className="naviButton" id="naviButton1">Imprimir Relatório Mensal</button>
-                    <div className="naviLine"/>
+                    <ul>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
+                            <ul>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">para Pequenos Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">para Grandes Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">para Animais Silvestres</button></li>
+                                <li><div className="naviLine"/></li>
+                            </ul>
+                        </li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton3">Diagnóstico por Imagem</button></li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton4">Procedimentos Cirúrgicos</button>
+                            <ul>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Grandes Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                                <li><div className="naviLine"/></li>
+                            </ul>
+                        </li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton5">Procedimentos Anestésicos</button>
+                            <ul>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Grandes Animais</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                                <li><div className="naviLine"/></li>
+                            </ul>
+                        </li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton6">Análises Laboratoriais</button>
+                            <ul>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">Bacteriose/Virose/Micológico</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">Parasitas</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">Patologia Clínica</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">Patologia Veterinária</button></li>
+                                <li><div className="naviLine"/></li>
+                                <li><button className="naviButtonCascade">Reprodução</button></li>
+                                <li><div className="naviLine"/></li>
+                            </ul>
+                        </li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton7">Necropsias</button></li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton8">Atendimentos Externos <br></br>a Grandes Animais</button></li>
+                        <li><div className="naviLine"/></li>
+                        <li><button className="naviButton" id="naviButton9">Imprimir Relatório Mensal</button></li>
+                        <li><div className="naviLine"/></li>
+                    </ul>
                 </div>
                 <div className="exitDiv">
                     <button id="exitButton">Sair</button>
