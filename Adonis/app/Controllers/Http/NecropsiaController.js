@@ -1,6 +1,6 @@
 'use strict'
 
-const Diagnostico = use('App/Models/Diagnostico')
+const Necropsia = use('App/Models/Necropsia')
 const Database = use('Database')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
@@ -8,12 +8,12 @@ const Database = use('Database')
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with diagnosticos
+ * Resourceful controller for interacting with necropsias
  */
-class DiagnosticoController {
+class NecropsiaController {
   /**
-   * Show a list of all diagnosticos.
-   * GET diagnosticos
+   * Show a list of all necropsias.
+   * GET necropsias
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -28,7 +28,7 @@ class DiagnosticoController {
     const { page } = request.only(["page"]) 
 
     const planilha = await Database
-    .table('diagnosticos')
+    .table('necropsias')
     .orderBy('id', 'cresc')
     .forPage(page, 10) //! Buscando em grupos de 10
 
@@ -36,28 +36,26 @@ class DiagnosticoController {
   }
 
   /**
-   * Render a form to be used for creating a new diagnostico.
-   * GET diagnosticos/create
+   * Create/save a new necropsia.
+   * POST necropsias
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-
   async store ({ request, response }) {
 
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     const data = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
 
-    const planilha = await Diagnostico.create(data)
+    const planilha = await Necropsia.create(data)
 
     return planilha
   }
 
   /**
-   * Display a single diagnostico.
-   * GET diagnosticos/:id
+   * Display a single necropsia.
+   * GET necropsias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -66,48 +64,44 @@ class DiagnosticoController {
    */
   async show ({ params, request, response }) {
 
-    const data = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
+    const data = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
 
     return data
   }
 
   /**
-   * Render a form to update an existing diagnostico.
-   * GET diagnosticos/:id/edit
+   * Update necropsia details.
+   * PUT or PATCH necropsias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
- 
   async update ({ params, request, response }) {
 
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
     const data = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
 
-    const planilha = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
+    const planilha = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
 
     planilha.merge(data) //* Faz a modificação na planilha
     await planilha.save()
-
-    //return planilha
   }
 
   /**
-   * Delete a diagnostico with id.
-   * DELETE diagnosticos/:id
+   * Delete a necropsia with id.
+   * DELETE necropsias/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
-    
-    const planilha = await Diagnostico.findOrFail(params.id)
+
+    const planilha = await Necropsia.findOrFail(params.id)
 
     await planilha.delete()
   }
 }
 
-module.exports = DiagnosticoController
+module.exports = NecropsiaController

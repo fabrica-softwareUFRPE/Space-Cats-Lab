@@ -35,6 +35,10 @@ Route.group(() => {
     Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly()
 })
 
+//! Rotas do setor de Necropsias
+Route.group(() => {
+    Route.resource('planilhas/necropsias', 'NecropsiaController').apiOnly()
+})
 
 
 

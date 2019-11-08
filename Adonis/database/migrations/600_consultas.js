@@ -15,7 +15,7 @@ class ConsultasSchema extends Schema {
       table.boolean('retorno', 3).notNullable() // recebe a string: sim/não
       table.string('tipo_proc', 8).notNullable() // simples ou complexo
       
-      table.string('tipoAnimal', 20).notNullable() // recebe a string: grande, pequeno ou silvestre
+      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
       
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção

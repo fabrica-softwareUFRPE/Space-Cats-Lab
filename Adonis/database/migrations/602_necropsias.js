@@ -11,9 +11,9 @@ class NecropsiasSchema extends Schema {
       table.string('animal_id', 11).notNullable() // id_animal será inserido pelo usuário. Não temos cadastro de pacientes
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 80).notNullable()
-      table.string('peso').notNullable() // peso até 100kg?
-     
-      table.string('tipo_animal', 80).notNullable() // recebe a string: grande, pequeno ou silvestre
+      //table.string('peso').notNullable() // peso até 100kg?
+      table.enu('peso', ["Não", "Sim"]).notNullable()
+      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
      
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção

@@ -14,7 +14,7 @@ class AnestesiaSchema extends Schema {
       // as tecnicas anestésicas estão na tabela tipos_anestesias pois é atributo multivalorado
       table.string('tipo_proc', 80).notNullable() // procedimento simples ou complexo
       
-      table.string('tipo_animal', 80).notNullable() // recebe a string: grande, pequeno ou silvestre
+      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
       
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
