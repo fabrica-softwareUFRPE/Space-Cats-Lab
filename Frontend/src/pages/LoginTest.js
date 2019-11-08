@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import { login } from '../../index';
+import { login } from '../api/index';
 
 export default function Login({ history }) {
     const [username, setUsername] = useState('');
