@@ -83,6 +83,13 @@ export default function TabelaFuncionario() {
 
     <MaterialTable 
       title="Funcionarios"
+      options={{
+        rowStyle: {
+          height: 10,
+          width:  1,
+          //backgroundColor: '#fff',
+        }
+      }}
       columns={state.columns}
       data={state.data}
       editable={{
@@ -105,24 +112,12 @@ export default function TabelaFuncionario() {
                 setState(prevState => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
-                  return { ...prevState, data };  
+                  return { ...prevState, data };
                 });
               }
             }, 600);
           })}}
-     /* editable={{
-        onRowAdd: newData =>
-          new Promise(resolve => {
-            setTimeout(() => {
-              resolve();
-              setState(prevState => {
-                const data = [...prevState.data];
-                data.push(newData);
-                return { ...prevState, data };
-              });
-            }, 600);
-          })}}
-    */
+  
       
     />
     </div>

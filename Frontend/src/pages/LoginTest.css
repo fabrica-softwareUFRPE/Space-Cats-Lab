@@ -72,6 +72,10 @@ body {
     align-items: center;
 }
 
+.login-container form button:hover {
+    background-color: rgb(36, 102, 90);
+}
+
 .rodape {
     height: 10vh;
     width: 100%;

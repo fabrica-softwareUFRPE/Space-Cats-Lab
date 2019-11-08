@@ -10,18 +10,24 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
+import { login } from '../api/index';
 
-export default function Login() {
+export default function Login({ history }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+
 
     function handleSubmit (e) {
         e.preventDefault();
 
-        if(username === '' || password === ''){
-            console.log("Informações incompletas.")
+        if(login(username, password)) {
+            history.push('/home');
         } else {
-            console.log(username, password);
+            alert("Usuário ou senha incorretos.");
+        }
+        if(username === '' || password === ''){
+            alert("Informações incompletas.");
         }
     }
 
@@ -63,7 +69,7 @@ export default function Login() {
                             </Grid>
                         </Grid>
                     </div>
-                    <button>Entrar</button>
+                    <button type="submit">Entrar</button>
                 </form>
             </div>
             
