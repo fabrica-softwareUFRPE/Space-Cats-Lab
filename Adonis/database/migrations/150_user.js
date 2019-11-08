@@ -20,7 +20,7 @@ class UserSchema extends Schema {
       table.string('atualizado_por').references('id').inTable('users') // data em que algum valor da linha foi alterado
       table.date('atualizado_em') // data em que algum valor da linha foi alterado // notNullable() não foi inserido de propósito
       
-      table.string('status') // ativo, inativo...
+      table.string('status').defaultTo('ativo') // ativo, inativo...
 
     })
   }

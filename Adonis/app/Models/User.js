@@ -16,7 +16,14 @@ class User extends Model {
       return false
     }
 
-  
+    static get createdAtColumn () {
+      return 'criado_em'
+    }
+
+    static get updatedAtColumn () {
+      return 'atualizado_em'
+    }
+
     setores() {
       return this
       .belongsToMany(
