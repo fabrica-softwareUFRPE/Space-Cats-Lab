@@ -30,5 +30,12 @@ Route.post('setores/register', 'SectorController.register')
 
 Route.get('setores/index', 'SectorController.index')
 
+//! Rotas do setor de Diagnostico por imagem
+Route.group(() => {
+    Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly()
+})
+
+
+
 
 
