@@ -16,7 +16,7 @@ class AnalisesSchema extends Schema {
       table.string('especie', 80).notNullable()
      // os procedimentos laboratoriais estão na tabela tipos_proc_lab por ser atributo multivalorado
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
-      table.string('quant_cmplexos', 40).notNullable() // quantidade de procedimentos complexos
+      table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
       table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
 

@@ -40,6 +40,10 @@ Route.group(() => {
     Route.resource('planilhas/necropsias', 'NecropsiaController').apiOnly()
 })
 
+//! Rotas do setor de Atendimentos externos a grandes animais
+Route.group(() => {
+    Route.resource('planilhas/externos', 'ExternoController').apiOnly()
+})
 
 
 

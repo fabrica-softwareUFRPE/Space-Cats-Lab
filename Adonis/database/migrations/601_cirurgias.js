@@ -13,7 +13,7 @@ class CirurgiasSchema extends Schema {
       table.string('especie', 40).notNullable() // vários valores
       // procedimentos cicurgicos vai para tabela tipos_cirurgias pois é 1 x N
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
-      table.string('quant_cmplexos', 40).notNullable() // quantidade de procedimentos complexos
+      table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
       table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
       

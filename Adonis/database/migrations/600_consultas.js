@@ -12,8 +12,9 @@ class ConsultasSchema extends Schema {
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 40).notNullable() // vários valores
       table.string('area', 40).notNullable() // vários valores
-      table.boolean('retorno', 3).notNullable() // recebe a string: sim/não
-      table.string('tipo_proc', 8).notNullable() // simples ou complexo
+      table.enu('retorno', ['Sim', 'Não']).notNullable() // simples ou complexo
+      table.enu('tipo_proc', ['simples', 'complexo']).notNullable() // simples ou complexo
+      table.enu('caso_novo', ['Sim', 'Não']).notNullable() // É um novo caso?
       
       table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
       
