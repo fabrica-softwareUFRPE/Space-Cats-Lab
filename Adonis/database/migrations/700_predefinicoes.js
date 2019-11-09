@@ -9,10 +9,11 @@ class PredefinicoesSchema extends Schema {
   up () {
     this.create('predefinicoes', (table) => {
       table.increments()
-      table.string('palavra', 80).notNullable()
-      table.integer('coluna').notNullable()  
-      table.integer('tabela_id').unsigned().references('id').inTable('setores')
-      table.unique(['palavra', 'coluna', 'tabela_id']) // garante uma combinação única
+      table.string('palavra', 80).notNullable().unique()
+      table.enu('setor', ['consultas', 'cirurgias', 'anestesias', 'diagnosticos', 'analises'])
+      //table.integer('coluna').notNullable()  
+      //table.integer('tabela_id').unsigned().references('id').inTable('setores')
+      //table.unique(['palavra', 'coluna', 'tabela_id']) // garante uma combinação única
     })
   }
 

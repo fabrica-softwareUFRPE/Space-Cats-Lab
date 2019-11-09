@@ -30,6 +30,11 @@ Route.post('setores/register', 'SectorController.register')
 
 Route.get('setores/index', 'SectorController.index')
 
+//! Rotas das predefinições
+Route.group(() => {
+    Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly()
+})
+
 //! Rotas do setor de Diagnostico por imagem
 Route.group(() => {
     Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly()
