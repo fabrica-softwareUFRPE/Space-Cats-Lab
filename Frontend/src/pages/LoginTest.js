@@ -23,11 +23,11 @@ export default function Login({ history }) {
 
         if(login(username, password)) {
             history.push('/home');
+        } 
+        else if (username === '' || password === '') {
+            alert("Informações incompletas.");
         } else {
             alert("Usuário ou senha incorretos.");
-        }
-        if(username === '' || password === ''){
-            alert("Informações incompletas.");
         }
     }
 
