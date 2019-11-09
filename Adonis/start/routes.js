@@ -45,5 +45,9 @@ Route.group(() => {
     Route.resource('planilhas/externos', 'ExternoController').apiOnly()
 })
 
+//! Rotas do setor de Consultas/Retornos
+Route.group(() => {
+    Route.resource('planilhas/consultas', 'ConsultaController').apiOnly()
+})
 
 
