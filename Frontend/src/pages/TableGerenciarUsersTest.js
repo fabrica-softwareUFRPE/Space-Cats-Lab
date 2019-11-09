@@ -8,7 +8,9 @@ export default function ManageUsers( { history }) {
         history.push('/');
     }
 
-    const [rowState, setRowState] = React.useState();
+    const [rowState, setRowState] = React.useState({
+        selectedRow: null,
+    });
 
     const [state, setState] = React.useState({
         columns: [
@@ -121,6 +123,11 @@ export default function ManageUsers( { history }) {
                     columns={state.columns}
                     data={state.data}
                     onRowClick={((e, selectedRow) => setRowState({ selectedRow }))}
+                    options={{
+                        rowStyle: rowData => ({
+                          backgroundColor: (rowState.selectedRow && rowState.selectedRow.tableData.id === rowData.tableData.id) ? '#DDD' : '#FFF'
+                        })
+                    }}
                 />
             </div>
         </div>
