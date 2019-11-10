@@ -2,6 +2,7 @@
 
 const Diagnostico = use('App/Models/Diagnostico')
 const Database = use('Database')
+const Predefinicao = use('App/Models/Predefinicao')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -48,11 +49,20 @@ class DiagnosticoController {
   async store ({ request, response }) {
 
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+    const { exames, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
 
-    const planilha = await Diagnostico.create(data)
+    const bool = await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
 
-    return planilha
+    if (await bool === true) {
+
+      const exames_string = exames.join(", ")
+      const planilha = await Diagnostico.create({ exame: exames_string, ...data })
+      return planilha
+      
+    } else {
+      return response.status(400).send({ message: "Valor inválido" })
+    }
+
   }
 
   /**
@@ -84,12 +94,23 @@ class DiagnosticoController {
   async update ({ params, request, response }) {
 
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+    const { exames, ...data } = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+
+    const bool = await await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
 
     const planilha = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
 
-    planilha.merge(data) //* Faz a modificação na planilha
-    await planilha.save()
+    if (await bool === true) {
+
+      const exames_string = exames.join(", ")
+      planilha.merge({ exame: exames_string, ...data}) //* Faz a modificação na planilha
+      await planilha.save()
+      
+    } else {
+      return response.status(400).send({ message: "Valor inválido" })
+    }
+
+
 
     //return planilha
   }
