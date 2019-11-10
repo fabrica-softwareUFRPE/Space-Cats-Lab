@@ -18,9 +18,11 @@ const Route = use('Route')
 Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
 
+    Route.post('/login', 'SessionController.login').validator('Login')
+    
 }).middleware('auth');
 
-Route.post('/login', 'SessionController.login')
+
 
 Route.get('users', 'UserController.indexUsers')
 
