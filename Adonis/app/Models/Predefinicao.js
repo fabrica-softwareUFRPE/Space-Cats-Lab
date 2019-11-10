@@ -5,10 +5,6 @@ const Model = use('Model')
 
 class Predefinicao extends Model {
 
-    constructor() {
-        super()
-    }
-
     static get table () {
         return 'predefinicoes'
       }
@@ -23,7 +19,7 @@ class Predefinicao extends Model {
 
     //* verifica se a predefinição (palavra) está cadastrada no setor (setor_pred)
     //* Retorna um booleano
-    static async validaPredefinicao (palavra, setor_pred) {
+    static async validaUmaPredefinicao (palavra, setor_pred) {
         
         const predefinicao =  await Predefinicao.findBy('palavra', palavra) //* captura a predefinição
 
@@ -43,6 +39,38 @@ class Predefinicao extends Model {
             return false
           }
     }
+    
+    static async validaPredefinicoes (array_de_palavras, setor_pred) {
+
+        const valor_repetido = [... new Set(array_de_palavras)] //! eXtreme Go Horse ATIVADO
+
+        //! eXtreme Go Horse ATIVADO
+        if (array_de_palavras.length !== valor_repetido.length) {
+            return false
+        }
+
+        //! eXtreme Go Horse ATIVADO
+        if (array_de_palavras.length === 0) {
+            return false
+        }
+
+        let booleano = true
+        //* Necessário entendimento de PROMISES
+        const map = await Promise.all(array_de_palavras.map(async (palavra) => {
+            let pred = await Predefinicao.findBy('palavra', palavra) //* capturando predefinição
+
+            if (await (pred) === undefined || await (pred) === null || await (pred.setor) !== setor_pred) {
+
+                //* Predefinição inexistente ou setor incorreto
+                booleano = false
+            }
+            return pred
+        }))
+
+        return booleano
+
+    }
+
 }
 
 module.exports = Predefinicao

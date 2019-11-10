@@ -51,7 +51,7 @@ class ConsultaController {
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     const data = request.except(['area','criado_em', 'atualizado_por', 'atualizado_em']) 
 
-    const bool = await Predefinicao.validaPredefinicao(area, 'consultas')
+    const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
     
     if (await bool === true) {
 
@@ -96,7 +96,7 @@ class ConsultaController {
 
     const planilha = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
   
-    const bool = await Predefinicao.validaPredefinicao(area, 'consultas')
+    const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
 
     if (await bool === true) {
 
