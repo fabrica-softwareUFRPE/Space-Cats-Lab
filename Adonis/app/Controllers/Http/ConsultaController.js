@@ -51,17 +51,13 @@ class ConsultaController {
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     const data = request.except(['area','criado_em', 'atualizado_por', 'atualizado_em']) 
 
-    const predefinicao = await Predefinicao.findBy('palavra', area)
+    const bool = await Predefinicao.validaPredefinicao(area, 'consultas')
+    
+    if (await bool === true) {
 
-    if ( await (predefinicao) === undefined || await (predefinicao) === null) {
-      
-      return response.status(400).send({ message: "Valor inválido" })
-
-    } else if (await (predefinicao.setor) === 'consultas') {
-      
       const planilha = await Consulta.create({ area: area, ...data })
       return planilha
-
+      
     } else {
       return response.status(400).send({ message: "Valor inválido" })
     }
@@ -98,19 +94,17 @@ class ConsultaController {
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
     const data = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
 
-    const predefinicao = await Predefinicao.findBy('palavra', area)
     const planilha = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
-    
-    if ( await (predefinicao) === undefined || await (predefinicao) === null) {
-      
-      return response.status(400).send({ message: "Valor inválido" })
+  
+    const bool = await Predefinicao.validaPredefinicao(area, 'consultas')
 
-    } else if (await (predefinicao.setor) === 'consultas') {
-      
+    if (await bool === true) {
+
       await (planilha).merge(data) //* Faz a modificação na planilha
       await planilha.save()
-
+      
     } else {
+
       return response.status(400).send({ message: "Valor inválido" })
     }
     
