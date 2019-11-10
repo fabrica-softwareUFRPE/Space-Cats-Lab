@@ -2,6 +2,7 @@
 
 const Consulta = use('App/Models/Consulta')
 const Database = use('Database')
+const Predefinicao = use('App/Models/Predefinicao')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -25,11 +26,12 @@ class ConsultaController {
     //* Não vamos listar todas as linhas da planilha de uma vez só
     //* Para isto, vamos utilizar paginação
     //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-    const { page } = request.only(["page"]) 
+    const { page, tipo_animal } = request.only(["page", "tipo_animal"]) 
 
     const planilha = await Database
     .table('consultas')
     .orderBy('id', 'cresc')
+    .where('tipo_animal', tipo_animal)
     .forPage(page, 10) //! Buscando em grupos de 10
 
     return planilha
@@ -45,12 +47,25 @@ class ConsultaController {
    */
   async store ({ request, response }) {
 
+    const { area } = request.only(["area"])
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+    const data = request.except(['area','criado_em', 'atualizado_por', 'atualizado_em']) 
 
-    const planilha = await Consulta.create(data)
+    const predefinicao = await Predefinicao.findBy('palavra', area)
 
-    return planilha
+    if ( await (predefinicao) === undefined || await (predefinicao) === null) {
+      
+      return response.status(400).send({ message: "Valor inválido" })
+
+    } else if (await (predefinicao.setor) === 'consultas') {
+      
+      const planilha = await Consulta.create({ area: area, ...data })
+      return planilha
+
+    } else {
+      return response.status(400).send({ message: "Valor inválido" })
+    }
+
   }
 
   /**
@@ -79,13 +94,27 @@ class ConsultaController {
    */
   async update ({ params, request, response }) {
 
+    const { area } = request.only(["area"])
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+    const data = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
 
+    const predefinicao = await Predefinicao.findBy('palavra', area)
     const planilha = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
+    
+    if ( await (predefinicao) === undefined || await (predefinicao) === null) {
+      
+      return response.status(400).send({ message: "Valor inválido" })
 
-    planilha.merge(data) //* Faz a modificação na planilha
-    await planilha.save()
+    } else if (await (predefinicao.setor) === 'consultas') {
+      
+      await (planilha).merge(data) //* Faz a modificação na planilha
+      await planilha.save()
+
+    } else {
+      return response.status(400).send({ message: "Valor inválido" })
+    }
+    
+
   }
 
   /**

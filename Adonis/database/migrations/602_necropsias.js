@@ -13,8 +13,6 @@ class NecropsiasSchema extends Schema {
       table.string('especie', 80).notNullable()
       //table.string('peso').notNullable() // peso até 100kg?
       table.enu('peso', ["até 100kg", "acima de 100kg"]).notNullable()
-      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
-     
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
       table.date('criado_em').notNullable() // data da inserção

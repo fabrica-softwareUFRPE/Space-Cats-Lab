@@ -13,8 +13,6 @@ class ExternosSchema extends Schema {
       table.enu('dist_prop', ['Até 100km', '101 a 500km', 'Acima de 500km']).notNullable()
       table.enu('tipo_atendimento', ['rebanho', 'individual']).notNullable()
 
-      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
-
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
       table.date('criado_em').notNullable() // data da inserção
