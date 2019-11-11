@@ -11,7 +11,7 @@ class AnestesiaSchema extends Schema {
       table.string('animal_id', 11).notNullable() // id_animal será inserido pelo usuário. Não temos cadastro de pacientes
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 40).notNullable() // vários valores
-      // as tecnicas anestésicas estão na tabela tipos_anestesias pois é atributo multivalorado
+      table.string('tecnica', 80).notNullable() // vários valores
       table.enu('tipo_proc', ['simples', 'complexo']).notNullable() // simples ou complexo
       
       table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre

@@ -17,12 +17,9 @@
 const Route = use('Route')
 Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
-
-    Route.post('/login', 'SessionController.login').validator('Login')
-    
 }).middleware('auth');
 
-
+Route.post('/login', 'SessionController.login').validator('Login')
 
 Route.get('users', 'UserController.indexUsers')
 
@@ -59,4 +56,7 @@ Route.group(() => {
     Route.resource('planilhas/consultas', 'ConsultaController').apiOnly()
 })
 
-
+//! Rotas do setor de Procedimentos Anestesicos
+Route.group(() => {
+    Route.resource('planilhas/anestesias', 'AnestesiaController').apiOnly()
+})

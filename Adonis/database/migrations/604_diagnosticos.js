@@ -11,7 +11,7 @@ class DiagnosticosSchema extends Schema {
       table.string('animal_id',11).notNullable()
       table.string('nome',80).notNullable()
       table.string('especie',80).notNullable()
-      table.string('exame',80).notNullable()
+      table.string('exames',80).notNullable()
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
       table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
 

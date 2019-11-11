@@ -14,14 +14,12 @@ class AnalisesSchema extends Schema {
       table.string('animal_id', 11).notNullable() // número identificador do animal
       table.string('nome', 80).notNullable()
       table.string('especie', 80).notNullable()
-     // os procedimentos laboratoriais estão na tabela tipos_proc_lab por ser atributo multivalorado
+      table.string('procedimento', 80).notNullable()
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
       table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
       table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
-
-      table.integer('setor_id').unsigned().references('id').inTable('setores') // chave estrangeira identifica o setor: Bacteriose, parasita ...
-
+      // table.integer('setor_id').unsigned().references('id').inTable('setores') // chave estrangeira identifica o setor: Bacteriose, parasita ...
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
       table.date('criado_em').notNullable() // data da inserção

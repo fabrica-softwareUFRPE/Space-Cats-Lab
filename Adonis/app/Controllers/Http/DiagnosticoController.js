@@ -56,7 +56,7 @@ class DiagnosticoController {
     if (await bool === true) {
 
       const exames_string = exames.join(", ")
-      const planilha = await Diagnostico.create({ exame: exames_string, ...data })
+      const planilha = await Diagnostico.create({ exames: exames_string, ...data })
       return planilha
       
     } else {
@@ -103,7 +103,7 @@ class DiagnosticoController {
     if (await bool === true) {
 
       const exames_string = exames.join(", ")
-      planilha.merge({ exame: exames_string, ...data}) //* Faz a modificação na planilha
+      planilha.merge({ exames: exames_string, ...data}) //* Faz a modificação na planilha
       await planilha.save()
       
     } else {
