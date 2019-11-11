@@ -4,17 +4,17 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-const Anestesia = use('App/Models/Anestesia')
+const Analise = use('App/Models/Analise')
 const Database = use('Database')
 const Predefinicao = use('App/Models/Predefinicao')
 
 /**
- * Resourceful controller for interacting with anestesias
+ * Resourceful controller for interacting with analises
  */
-class AnestesiaController {
+class AnaliseController {
   /**
-   * Show a list of all anestesias.
-   * GET anestesias
+   * Show a list of all analises.
+   * GET analises
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -29,12 +29,12 @@ class AnestesiaController {
 
     try {
       
-      const { page, tipo_animal } = request.only(["page", "tipo_animal"]) 
+      const { page, analise_tipo } = request.only(["page", "analise_tipo"]) 
   
       const planilha = await Database
-      .table('anestesias')
+      .table('analises')
       .orderBy('id', 'cresc')
-      .where('tipo_animal', tipo_animal)
+      .where('analise_tipo', analise_tipo)
       .forPage(page, 10) //! Buscando em grupos de 10
   
       return planilha
@@ -43,11 +43,11 @@ class AnestesiaController {
 
       return response.status(400).send({ message: "Valor inválido" })
     }
-  }
 
+  }
   /**
-   * Create/save a new anestesia.
-   * POST anestesias
+   * Create/save a new analise.
+   * POST analises
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -55,18 +55,16 @@ class AnestesiaController {
    */
   async store ({ request, response }) {
 
-    //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     //TODO adicionar o campo criado_por  no request.except
-    
     try {
 
-      const { tecnicas, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+      const { procedimentos, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
       
-      const bool = await Predefinicao.validaPredefinicoes(tecnicas, 'anestesias')
+      const bool = await Predefinicao.validaPredefinicoes(procedimentos, data.analise_tipo)
       
       if (await bool === true) {
-        const tecnicas_string = tecnicas.join(", ")
-        const planilha = await Anestesia.create({ tecnicas: tecnicas_string, ...data })
+        const procedimentos_string = procedimentos.join(", ")
+        const planilha = await Analise.create({ procedimentos: procedimentos_string, ...data })
         return planilha
         
       } else {
@@ -78,12 +76,11 @@ class AnestesiaController {
       return response.status(400).send({ message: "Valores inválidos" })
     }
 
-
   }
 
   /**
-   * Display a single anestesia.
-   * GET anestesias/:id
+   * Display a single analise.
+   * GET analises/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -94,17 +91,18 @@ class AnestesiaController {
 
     try {
 
-      const data = await Anestesia.findOrFail(params.id) //* capturando a planilha desejada
+      const data = await Analise.findOrFail(params.id) //* capturando a planilha desejada
       return data
 
     } catch(error) {
 
       return response.status(400).send({ message: "Valores inválidos" })
     }
+
   }
   /**
-   * Update anestesia details.
-   * PUT or PATCH anestesias/:id
+   * Update analise details.
+   * PUT or PATCH analises/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -112,21 +110,19 @@ class AnestesiaController {
    */
   async update ({ params, request, response }) {
 
-    //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
     //TODO retirar atualizado_por de request.except(...)
-    
     try {
       
-      const { tecnicas, ...data } = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+      const { procedimentos, analise_tipo, ...data } = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
   
-      const bool = await Predefinicao.validaPredefinicoes(tecnicas, 'anestesias')
-      const planilha = await Anestesia.findOrFail(params.id) //* capturando a planilha desejada
+      const bool = await Predefinicao.validaPredefinicoes(procedimentos, analise_tipo)
+      const planilha = await Analise.findOrFail(params.id) //* capturando a planilha desejada
 
       if (await bool === true) {
   
-        const tecnicas_string = tecnicas.join(", ")
+        const procedimentos_string = procedimentos.join(", ")
   
-        planilha.merge({ tecnicas: tecnicas_string, ...data}) //* Faz a modificação na planilha
+        planilha.merge({ procedimentos: procedimentos_string, ...data}) //* Faz a modificação na planilha
         await planilha.save()
       } else {
         return response.status(400).send({ message: "Valores inválidos" })
@@ -137,12 +133,11 @@ class AnestesiaController {
       return response.status(400).send({ message: "Valores inválidos" })
     }
 
-        
   }
 
   /**
-   * Delete a anestesia with id.
-   * DELETE anestesias/:id
+   * Delete a analise with id.
+   * DELETE analises/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -152,7 +147,7 @@ class AnestesiaController {
 
     try {
       
-      const planilha = await Anestesia.findOrFail(params.id)
+      const planilha = await Analise.findOrFail(params.id)
       await planilha.delete()
 
     } catch(error) {
@@ -160,7 +155,6 @@ class AnestesiaController {
     }
 
   }
-
 }
 
-module.exports = AnestesiaController
+module.exports = AnaliseController

@@ -10,7 +10,7 @@ class PredefinicoesSchema extends Schema {
     this.create('predefinicoes', (table) => {
       table.increments()
       table.string('palavra', 80).notNullable().unique()
-      table.enu('setor', ['consultas', 'cirurgias', 'anestesias', 'diagnosticos', 'analises'])
+      table.enu('setor', ['consultas', 'cirurgias', 'anestesias', 'diagnosticos', 'bacteriose', 'parasitas', 'patologia_clinica', 'patologia_veterinaria', 'reproduçao']).notNullable()
       //table.integer('coluna').notNullable()  
       //table.integer('tabela_id').unsigned().references('id').inTable('setores')
       //table.unique(['palavra', 'coluna', 'tabela_id']) // garante uma combinação única

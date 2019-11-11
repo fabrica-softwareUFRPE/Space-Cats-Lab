@@ -117,7 +117,7 @@ class CirurgiaController {
     
     try {
       
-      const { procedimentos, ...data } = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+      const { procedimentos, ...data } = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
   
       const bool = await Predefinicao.validaPredefinicoes(procedimentos, 'cirurgias')
       const planilha = await Cirurgia.findOrFail(params.id) //* capturando a planilha desejada

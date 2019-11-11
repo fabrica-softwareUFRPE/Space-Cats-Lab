@@ -18,7 +18,7 @@ class AnalisesSchema extends Schema {
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
       table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
-      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
+      table.enu('analise_tipo', ['bacteriose', 'parasitas', 'patologia_clinica', 'patologia_veterinaria', 'reproduçao']).notNullable()
       // table.integer('setor_id').unsigned().references('id').inTable('setores') // chave estrangeira identifica o setor: Bacteriose, parasita ...
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção
