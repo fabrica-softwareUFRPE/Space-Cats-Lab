@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Cirurgia extends Model {
-    
+
     static get createdAtColumn () {
         return 'criado_em'
       }

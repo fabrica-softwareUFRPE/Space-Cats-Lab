@@ -60,3 +60,8 @@ Route.group(() => {
 Route.group(() => {
     Route.resource('planilhas/anestesias', 'AnestesiaController').apiOnly()
 })
+
+//! Rotas do setor de Procedimentos Cirúrgicos
+Route.group(() => {
+    Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly()
+})

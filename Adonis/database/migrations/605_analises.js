@@ -14,7 +14,7 @@ class AnalisesSchema extends Schema {
       table.string('animal_id', 11).notNullable() // número identificador do animal
       table.string('nome', 80).notNullable()
       table.string('especie', 80).notNullable()
-      table.string('procedimento', 80).notNullable()
+      table.string('procedimentos', 80).notNullable()
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
       table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       

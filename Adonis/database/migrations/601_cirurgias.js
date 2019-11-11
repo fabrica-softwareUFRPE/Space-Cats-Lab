@@ -11,7 +11,7 @@ class CirurgiasSchema extends Schema {
       table.string('animal_id', 11).notNullable() // id_animal será inserido pelo usuário. Não temos cadastro de pacientes
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 40).notNullable() // vários valores
-      table.string('procedimento', 80).notNullable() // vários valores
+      table.string('procedimentos', 80).notNullable() // vários valores
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
       table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
