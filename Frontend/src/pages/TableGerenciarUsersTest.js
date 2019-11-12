@@ -2,10 +2,34 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import './TableGerenciarUsersTest.css';
+import { TextField } from '@material-ui/core';
 
 export default function ManageUsers( { history }) {
     function exitFunction (e) {
-        history.push('/');
+        console.log(rowState.selectedRow)
+        //history.push('/');
+    }
+
+    function handleClick (e, selectedRow) {
+        rowState.selectedRow = selectedRow;
+
+        document.getElementById("nomeText").value = `${rowState.selectedRow.nome}`;
+        document.getElementById("loginText").value = `${rowState.selectedRow.login}`;
+        document.getElementById("senhaText").value = `${rowState.selectedRow.senha}`;
+        document.getElementById("emailText").value = `${rowState.selectedRow.email}`;
+
+        if(rowState.selectedRow.funcao === 1){
+            document.getElementById("funcaoText").value = "Adminstrador"
+        } else if (rowState.selectedRow.funcao === 2) {
+            document.getElementById("funcaoText").value = "Professor"
+        } else {
+            document.getElementById("funcaoText").value = "Residente"
+        }
+        if(rowState.selectedRow.estado === 1){
+            document.getElementById("estadoText").value = "Ativo"
+        } else {
+            document.getElementById("estadoText").value = "Inativo"
+        }
     }
 
     const [rowState, setRowState] = React.useState({
@@ -30,9 +54,10 @@ export default function ManageUsers( { history }) {
           },
         ],
         data: [
-          { nome: 'Eduardo', login: 'PCEdu42', senha: '123456789', email: 'Eduardogomes42@hotmail.com', funcao: 1, estado: 1 },
-          { nome: 'Geraldo', login: 'bbbbb', senha: '111111111', email: 'placeholder@hotmail.com', funcao: 1, estado: 2 },
-          { nome: 'Rodrigo', login: 'ccccc', senha: '222222222', email: 'placeholder2@hotmail.com', funcao: 1, estado: 1 },
+          { nome: 'Eduardo', login: 'aaaaa', senha: '123456789', email: 'placeholder3@hotmail.com', funcao: 1, estado: 1 },
+          { nome: 'Geraldo', login: 'bbbbb', senha: '111111111', email: 'placeholder@hotmail.com', funcao: 2, estado: 2 },
+          { nome: 'Rodrigo', login: 'ccccc', senha: '222222222', email: 'placeholder2@hotmail.com', funcao: 3, estado: 1 },
+          { nome: 'Fulano', login: 'biscoito', senha: '2345meia78', email: 'fulanodasilva23@gmail.com', funcao: 3, estado: 1 },
         ],
       });
 
@@ -40,7 +65,7 @@ export default function ManageUsers( { history }) {
         <div className="pageGerenciarUsers">
             <div className="sideBar">
                 <div className="headDiv">
-                    <p><center>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</center></p>
+                <center><p>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</p></center>
                     <p>USERNAME</p>
                 </div>
                 <div className="naviDiv">
@@ -48,7 +73,7 @@ export default function ManageUsers( { history }) {
                         <li><div className="naviLine"/></li>
                         <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
                                 <ul>
                                     <li><button className="naviButtonCascade">para Pequenos Animais</button></li>
@@ -60,7 +85,7 @@ export default function ManageUsers( { history }) {
                         <li><div className="naviLine"/></li>
                         <li><button className="naviButton" id="naviButton3">Diagnóstico por Imagem</button></li>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                             <li><button className="naviButton" id="naviButton4">Procedimentos Cirúrgicos</button>
                                 <ul>
                                     <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
@@ -70,7 +95,7 @@ export default function ManageUsers( { history }) {
                             </li>
                         </div>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                         <li><button className="naviButton" id="naviButton5">Procedimentos Anestésicos</button>
                             <ul>
                                 <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
@@ -80,7 +105,7 @@ export default function ManageUsers( { history }) {
                         </li>
                         </div>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                         <li><button className="naviButton" id="naviButton6">Análises Laboratoriais</button>
                             <ul>
                                 <li><button className="naviButtonCascade">Bacteriose/Virose/Micológico</button></li>
@@ -110,25 +135,35 @@ export default function ManageUsers( { history }) {
             href="https://fonts.googleapis.com/icon?family=Material+Icons"
             />
 
-            <div className="tableContainer">
-                <MaterialTable 
-                    title="Funcionarios"
-                    options={{
-                    rowStyle: {
-                        height: 10,
-                        width:  1,
-                        //backgroundColor: '#fff',
-                    }
-                    }}
-                    columns={state.columns}
-                    data={state.data}
-                    onRowClick={((e, selectedRow) => setRowState({ selectedRow }))}
-                    options={{
-                        rowStyle: rowData => ({
-                          backgroundColor: (rowState.selectedRow && rowState.selectedRow.tableData.id === rowData.tableData.id) ? '#DDD' : '#FFF'
-                        })
-                    }}
-                />
+            <div className="bigContainer">
+                <div className="tableContainer">
+                    <MaterialTable
+                        title="Gerenciar Usuários"
+                        columns={state.columns}
+                        data={state.data}
+                        onRowClick={(e, selectedRow) => handleClick(e, selectedRow)}
+                        options={{
+                            rowStyle: rowData => ({
+                            backgroundColor: (rowData.tableData.id % 2) ? '#DEDF' : '#FFF'
+                            })
+                        }}
+                    />
+                </div>
+                <div className="itemContainer1">
+                    <input id="nomeText" type="text" placeholder="Nome" readOnly />
+                    <input id="loginText" type="text" placeholder="Login" readOnly />
+                    <input id="senhaText" type="text" placeholder="Senha" readOnly />
+                    <input id="emailText" type="text" placeholder="Email" readOnly />
+                </div>
+                <div className="itemContainer2">
+                    <input id="funcaoText" type="text" placeholder="Função" readOnly />
+                    <input id="estadoText" type="text" placeholder="Estado" readOnly />
+                </div>
+                <div className="buttonsContainer">
+                    <button>Adicionar</button>
+                    <button>Editar</button>
+                    <button>Deletar</button>
+                </div>
             </div>
         </div>
     );

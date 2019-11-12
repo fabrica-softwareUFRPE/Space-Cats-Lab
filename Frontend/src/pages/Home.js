@@ -31,7 +31,7 @@ export default function Home( { history }) {
                         <li><div className="naviLine"/></li>
                         <li><button className="naviButton" id="naviButton3">Diagnóstico por Imagem</button></li>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                             <li><button className="naviButton" id="naviButton4">Procedimentos Cirúrgicos</button>
                                 <ul>
                                     <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
@@ -41,7 +41,7 @@ export default function Home( { history }) {
                             </li>
                         </div>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                         <li><button className="naviButton" id="naviButton5">Procedimentos Anestésicos</button>
                             <ul>
                                 <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
@@ -51,7 +51,7 @@ export default function Home( { history }) {
                         </li>
                         </div>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                         <li><button className="naviButton" id="naviButton6">Análises Laboratoriais</button>
                             <ul>
                                 <li><button className="naviButtonCascade">Bacteriose/Virose/Micológico</button></li>

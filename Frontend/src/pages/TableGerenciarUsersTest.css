@@ -12,14 +12,93 @@ body {
     align-items: center;
 }
 
-.pageGerenciarUsers .tableContainer {
+.pageGerenciarUsers .bigContainer{
     width: 84vw;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pageGerenciarUsers .bigContainer .tableContainer {
+    width: 84vw;
+    height: 65%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #20202065;
+}
+
+.pageGerenciarUsers .bigContainer .itemContainer1 {
+    width: 84vw;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #20202065;
+}
+
+.pageGerenciarUsers .bigContainer .itemContainer1 input {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 200px;
+    padding: 5px;
+    font-size: 15px;
+    color: #666;
+    text-align: center;
+}
+
+.pageGerenciarUsers .bigContainer .itemContainer2 {
+    width: 84vw;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #20202065;
+}
+
+.pageGerenciarUsers .bigContainer .itemContainer2 input {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 150px;
+    padding: 5px;
+    font-size: 15px;
+    color: #666;
+    text-align: center;
+}
+
+.pageGerenciarUsers .bigContainer .buttonsContainer {
+    width: 84vw;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #20202065;
+}
+
+.pageGerenciarUsers .bigContainer .buttonsContainer button {
+    margin-top: -3vh;
+    margin-left: 40px;
+    margin-right: 40px;
+    border: 1px solid rgb(17, 48, 42);
+    border-radius: 10px;
+    padding: 15px;
+    width: 140px;
+    font-size: 14px;
+    background: #1D5047;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    align-items: center;
+}
+
+.pageGerenciarUsers .bigContainer .buttonsContainer button:hover {
+    background-color: rgb(36, 102, 90);
 }
 
 /* Tudo daqui pra baixo diz respeito ao CSS da Sidebar */
