@@ -17,11 +17,13 @@
 const Route = use('Route')
 Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
-})//.middleware('auth');
+}).middleware('auth');
 
 Route.post('/login', 'SessionController.login').validator('Login')
 
 Route.get('users', 'UserController.indexUsers')
+
+Route.patch('users/:id', 'UserController.destroy')
 
 Route.get('users/setores/:id', 'UserController.indexSectorsOfUser')
 

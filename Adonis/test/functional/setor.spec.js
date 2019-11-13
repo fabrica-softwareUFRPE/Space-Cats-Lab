@@ -5,7 +5,7 @@ const Setor = use('App/Models/Setor')
 
 trait('Test/ApiClient')
 
-test('Create Setor', async ({ client }) => {
+test('Deve criar um setor', async ({ client }) => {
 
   const response = await client.post('/setores/register').send({
     nome: "Necropsias"
