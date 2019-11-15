@@ -11,4 +11,6 @@ tmp
 database/development.sqlite
 
 adonis_teste.sqlite
-necropsias.spec.js
+adonis_teste.sqlite-journal
+
+predefinicao.spec.js

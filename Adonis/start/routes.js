@@ -35,7 +35,7 @@ Route.get('setores/index', 'SectorController.index')
 
 Route.group(() => {
     //! Rotas das predefinições
-    Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly()
+    Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly().middleware('auth')
 
     //! Rotas do setor de Análises laboratoriais
     Route.resource('planilhas/analises', 'AnaliseController').apiOnly()
