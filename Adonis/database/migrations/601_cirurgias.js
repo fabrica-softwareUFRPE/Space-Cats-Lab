@@ -11,11 +11,11 @@ class CirurgiasSchema extends Schema {
       table.string('animal_id', 11).notNullable() // id_animal será inserido pelo usuário. Não temos cadastro de pacientes
       table.string('nome', 80).notNullable() // nome do animal
       table.string('especie', 40).notNullable() // vários valores
-      // procedimentos cicurgicos vai para tabela tipos_cirurgias pois é 1 x N
+      table.string('procedimentos', 80).notNullable() // vários valores
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
-      table.string('quant_cmplexos', 40).notNullable() // quantidade de procedimentos complexos
+      table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
       
-      table.string('tipo_animal', 20).notNullable() // recebe a string: grande, pequeno ou silvestre
+      table.enu('tipo_animal', ['pequeno', 'grande', 'silvestre']).notNullable() // recebe a string: grande, pequeno ou silvestre
       
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção

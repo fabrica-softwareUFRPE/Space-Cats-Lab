@@ -11,11 +11,9 @@ class DiagnosticosSchema extends Schema {
       table.string('animal_id',11).notNullable()
       table.string('nome',80).notNullable()
       table.string('especie',80).notNullable()
-      // exame vai pra tabela tipos_exames por ser 1 x N
+      table.string('exames',80).notNullable()
       table.string('quant_simples', 40).notNullable() // quantidade de procedimentos simples
-      table.string('quant_cmplexos', 40).notNullable() // quantidade de procedimentos complexos
-
-      table.string('tipo_animal', 20).notNullable() // recebe a string: grande, pequeno ou silvestre
+      table.string('quant_complexos', 40).notNullable() // quantidade de procedimentos complexos
 
       // para rastrear a autoria
       table.string('criado_por', 11).references('id').inTable('users') // chave estrangeira //cpf de quem fez a inserção

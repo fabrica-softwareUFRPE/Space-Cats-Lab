@@ -9,3 +9,6 @@ tmp
 
 # The development sqlite file
 database/development.sqlite
+
+adonis_teste.sqlite
+necropsias.spec.js
