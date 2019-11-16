@@ -26,15 +26,23 @@ class ConsultaController {
     //* Não vamos listar todas as linhas da planilha de uma vez só
     //* Para isto, vamos utilizar paginação
     //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-    const { page, tipo_animal } = request.only(["page", "tipo_animal"]) 
 
-    const planilha = await Database
-    .table('consultas')
-    .orderBy('id', 'cresc')
-    .where('tipo_animal', tipo_animal)
-    .forPage(page, 10) //! Buscando em grupos de 10
+    try {
+      
+      const { page, tipo_animal } = request.only(["page", "tipo_animal"]) 
+  
+      const planilha = await Database
+      .table('consultas')
+      .orderBy('id', 'cresc')
+      .where('tipo_animal', tipo_animal)
+      .forPage(page, 10) //! Buscando em grupos de 10
+  
+      return planilha
 
-    return planilha
+    } catch(error) {
+
+      return response.status(400).send({ message: "Valores inválidos"})
+    }
   }
 
   /**
@@ -45,22 +53,30 @@ class ConsultaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
 
-    const { area } = request.only(["area"])
-    //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(['area','criado_em', 'atualizado_por', 'atualizado_em']) 
-
-    const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
-    
-    if (await bool === true) {
-
-      const planilha = await Consulta.create({ area: area, ...data })
-      return planilha
+    try {
       
-    } else {
-      return response.status(400).send({ message: "Valor inválido" })
+      const { area } = request.only(["area"])
+      //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
+      const data = request.except(["criado_por", 'area','criado_em', 'atualizado_por', 'atualizado_em']) 
+  
+      const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
+      
+      if (await bool === true) {
+  
+        const planilha = await Consulta.create({ area: area, criado_por: auth.user.id, ...data })
+        return planilha
+        
+      } else {
+        return response.status(400).send({ message: "Valores inválidos" })
+      }
+
+    } catch(error) {
+
+      return response.status(400).send({ message: "Valores inválidos" })      
     }
+
 
   }
 
@@ -75,9 +91,15 @@ class ConsultaController {
    */
   async show ({ params, request, response }) {
 
-    const data = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
+    try {
+      
+      const data = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
+  
+      return data
 
-    return data
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
+    }
   }
 
   /**
@@ -88,24 +110,30 @@ class ConsultaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
 
-    const { area } = request.only(["area"])
-    //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
-
-    const planilha = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
-  
-    const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
-
-    if (await bool === true) {
-
-      await (planilha).merge(data) //* Faz a modificação na planilha
-      await planilha.save()
+    try {
       
-    } else {
+      const { area } = request.only(["area"])
+      //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
+      const data = request.except(["atualizado_por", "tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+  
+      const planilha = await Consulta.findOrFail(params.id) //* capturando a planilha desejada
+    
+      const bool = await Predefinicao.validaUmaPredefinicao(area, 'consultas')
+  
+      if (await bool === true) {
+  
+        await (planilha).merge({ atualizado_por: auth.user.id, ...data }) //* Faz a modificação na planilha
+        await planilha.save()
+        
+      } else {
+  
+        return response.status(400).send({ message: "Valores inválidos" })
+      }
 
-      return response.status(400).send({ message: "Valor inválido" })
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
     }
     
 
@@ -121,9 +149,15 @@ class ConsultaController {
    */
   async destroy ({ params, request, response }) {
 
-    const planilha = await Consulta.findOrFail(params.id)
+    try {
+      
+      const planilha = await Consulta.findOrFail(params.id)
+  
+      await planilha.delete()
 
-    await planilha.delete()
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
+    }
   }
 }
 

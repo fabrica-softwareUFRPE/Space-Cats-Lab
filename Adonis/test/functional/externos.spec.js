@@ -2,8 +2,10 @@
 
 const { test, trait, afterEach } = use('Test/Suite')('Externos')
 const Externo = use('App/Models/Externo')
+const Factory = use('Factory')
 
 trait('Test/ApiClient')
+trait('Auth/Client')
 
 afterEach(async () => {
   await Externo.query().delete()
@@ -11,26 +13,41 @@ afterEach(async () => {
 
 test('Deve criar planilha de atendimentos externos', async ({ client }) => {
 
-  const response = await client.post('/planilhas/externos').send({
+  const user = await Factory
+    .model('App/Models/User')
+    .create()
+    
+    
+  const { data_proc, animal_id, propriedade, dist_prop, tipo_atendimento } = await Factory
+    .model('App/Models/Externo')
+    .create()
 
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
+const response = await client.post('/planilhas/externos').loginVia(user).send({
+  data_proc: data_proc,
+  animal_id: animal_id,
+  propriedade: propriedade,
+  dist_prop: dist_prop,
+  tipo_atendimento: tipo_atendimento
+}).end()
 
-  }).end()
+  // console.log(planilha)
+  // console.log("planilha")
+  // console.log("planilha")
+  // console.log("planilha")
+  // console.log("planilha")
+  // console.log(response)
+
 
   response.assertStatus(200)
   response.assertJSONSubset({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
+    data_proc,
+    animal_id,
+    propriedade,
+    dist_prop,
+    tipo_atendimento 
   })
+
+  console.log(user)
 
 })
 

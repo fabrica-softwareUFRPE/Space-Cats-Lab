@@ -52,4 +52,4 @@ Route.group(() => {
     //! Rotas do setor de Diagnostico por imagem
     Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly()
 
-}) //TODO Color depois: middleware('auth')
+}).middleware('auth')

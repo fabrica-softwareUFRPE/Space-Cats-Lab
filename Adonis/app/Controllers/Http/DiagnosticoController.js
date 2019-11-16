@@ -26,14 +26,20 @@ class DiagnosticoController {
     //* Não vamos listar todas as linhas da planilha de uma vez só
     //* Para isto, vamos utilizar paginação
     //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-    const { page } = request.only(["page"]) 
 
-    const planilha = await Database
-    .table('diagnosticos')
-    .orderBy('id', 'cresc')
-    .forPage(page, 10) //! Buscando em grupos de 10
+    try {
+      const { page } = request.only(["page"]) 
+  
+      const planilha = await Database
+      .table('diagnosticos')
+      .orderBy('id', 'cresc')
+      .forPage(page, 10) //! Buscando em grupos de 10
+  
+      return planilha
 
-    return planilha
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
+    }
   }
 
   /**
@@ -46,22 +52,28 @@ class DiagnosticoController {
    * @param {View} ctx.view
    */
 
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
 
-    //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
-    const { exames, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+    try{
+      //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
+      const { exames, ...data } = request.except(['criado_por', 'criado_em', 'atualizado_por', 'atualizado_em']) 
+  
+      const bool = await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
+  
+      if (await bool === true) {
+  
+        const exames_string = exames.join(", ")
+        const planilha = await Diagnostico.create({ exames: exames_string, criado_por: auth.user.id, ...data })
+        return planilha
+        
+      } else {
+        return response.status(400).send({ message: "Valor inválido" })
+      }
 
-    const bool = await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
-
-    if (await bool === true) {
-
-      const exames_string = exames.join(", ")
-      const planilha = await Diagnostico.create({ exames: exames_string, ...data })
-      return planilha
-      
-    } else {
-      return response.status(400).send({ message: "Valor inválido" })
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
     }
+
 
   }
 
@@ -76,9 +88,14 @@ class DiagnosticoController {
    */
   async show ({ params, request, response }) {
 
-    const data = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
+    try {
+      const data = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
+  
+      return data
 
-    return data
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
+    }
   }
 
   /**
@@ -91,28 +108,30 @@ class DiagnosticoController {
    * @param {View} ctx.view
    */
  
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
 
-    //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
-    const { exames, ...data } = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+    try {
+      //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
+      const { exames, ...data } = request.except(["atualizado_por", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+  
+      const bool = await await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
+  
+      const planilha = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
+  
+      if (await bool === true) {
+  
+        const exames_string = exames.join(", ")
+        planilha.merge({ exames: exames_string, atualizado_por: auth.user.id, ...data}) //* Faz a modificação na planilha
+        await planilha.save()
+        
+      } else {
+        return response.status(400).send({ message: "Valor inválido" })
+      }
 
-    const bool = await await Predefinicao.validaPredefinicoes(exames, 'diagnosticos')
-
-    const planilha = await Diagnostico.findOrFail(params.id) //* capturando a planilha desejada
-
-    if (await bool === true) {
-
-      const exames_string = exames.join(", ")
-      planilha.merge({ exames: exames_string, ...data}) //* Faz a modificação na planilha
-      await planilha.save()
-      
-    } else {
-      return response.status(400).send({ message: "Valor inválido" })
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
     }
 
-
-
-    //return planilha
   }
 
   /**
@@ -125,9 +144,14 @@ class DiagnosticoController {
    */
   async destroy ({ params, request, response }) {
     
-    const planilha = await Diagnostico.findOrFail(params.id)
+    try {
+      const planilha = await Diagnostico.findOrFail(params.id)
+  
+      await planilha.delete()
 
-    await planilha.delete()
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos" })
+    }
   }
 }
 
