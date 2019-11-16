@@ -23,20 +23,12 @@ test('Deve criar planilha de atendimentos externos', async ({ client }) => {
     .create()
 
 const response = await client.post('/planilhas/externos').loginVia(user).send({
-  data_proc: data_proc,
-  animal_id: animal_id,
-  propriedade: propriedade,
-  dist_prop: dist_prop,
-  tipo_atendimento: tipo_atendimento
+  data_proc,
+  animal_id,
+  propriedade,
+  dist_prop,
+  tipo_atendimento
 }).end()
-
-  // console.log(planilha)
-  // console.log("planilha")
-  // console.log("planilha")
-  // console.log("planilha")
-  // console.log("planilha")
-  // console.log(response)
-
 
   response.assertStatus(200)
   response.assertJSONSubset({
@@ -47,33 +39,30 @@ const response = await client.post('/planilhas/externos').loginVia(user).send({
     tipo_atendimento 
   })
 
-  console.log(user)
-
 })
 
 
 test('Deve listar a planilha de atendimentos externos', async ({ client }) => {
 
-  const planilha1 = await Externo.create({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
-  })
-  
+  const user = await Factory
+    .model('App/Models/User')
+    .create()
+    
+    
+  const { data_proc, animal_id, propriedade, dist_prop, tipo_atendimento } = await Factory
+    .model('App/Models/Externo')
+    .create()
+
   const planilha2 = await Externo.create({
     data_proc: "2018-11-10",
     animal_id: "10",
     propriedade: "outro lugar",
     dist_prop: "Acima de 500km",
-    tipo_atendimento: "individual",
-    criado_por: "2"
+    tipo_atendimento: "individual"
   })
 
 
-  const response = await client.get('/planilhas/externos').send({
+  const response = await client.get('/planilhas/externos').loginVia(user).send({
     
     page: 1
     
@@ -81,39 +70,34 @@ test('Deve listar a planilha de atendimentos externos', async ({ client }) => {
 
   response.assertStatus(200)
   response.assertJSONSubset([{
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
+    data_proc,
+    animal_id,
+    propriedade,
+    dist_prop,
+    tipo_atendimento,
   }, {
     data_proc: "2018-11-10",
     animal_id: "10",
     propriedade: "outro lugar",
     dist_prop: "Acima de 500km",
-    tipo_atendimento: "individual",
-    criado_por: "2"
+    tipo_atendimento: "individual"
   }])
 
 })
 
 test('Deve atualizar uma planilha', async ({ client, assert }) => {
 
-  const planilha1 = await Externo.create({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
-  })
+  const user = await Factory
+    .model('App/Models/User')
+    .create()
+    
+  const planilha1 = await Factory
+    .model('App/Models/Externo')
+    .create()
 
   const { id } = planilha1
 
-  // console.log(planilha1)
-
-  const response = await client.put(`/planilhas/externos/${id}`).send({
+  const response = await client.put(`/planilhas/externos/${id}`).loginVia(user).send({
 
     data_proc: "2017-10-09",
     animal_id: "3",
@@ -131,25 +115,21 @@ test('Deve atualizar uma planilha', async ({ client, assert }) => {
   assert.equal(planilha.propriedade, "outro lugar")
   assert.equal(planilha.dist_prop, "Acima de 500km")
   assert.equal(planilha.tipo_atendimento, "individual")
-  assert.equal(planilha.criado_por, "1")
-
 })
 
 
 test('Deve deletar uma linha de uma planilha', async ({ client, assert }) => {
 
-  const planilha1 = await Externo.create({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
-  })
+  const user = await Factory
+  .model('App/Models/User')
+  .create()
+  
+  
+  const { id } = await Factory
+  .model('App/Models/Externo')
+  .create()
 
-  const { id } = planilha1
-
-  const response = await client.delete(`/planilhas/externos/${id}`).send().end()
+  const response = await client.delete(`/planilhas/externos/${id}`).loginVia(user).send().end()
 
   const planilha = await Externo.find(id)
 
@@ -160,29 +140,23 @@ test('Deve deletar uma linha de uma planilha', async ({ client, assert }) => {
 
 test('Deve retornar uma linha de uma planilha', async ({ client, assert }) => {
 
-  const planilha1 = await Externo.create({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
-  })
+  const user = await Factory
+  .model('App/Models/User')
+  .create()
+  
+  const { id, data_proc, animal_id, propriedade, dist_prop, tipo_atendimento } = await Factory
+    .model('App/Models/Externo')
+    .create()
 
-  const { id } = planilha1
-
-  const response = await client.get(`/planilhas/externos/${id}`).send().end()
-
-  // const planilha = await Externo.find(id)
+  const response = await client.get(`/planilhas/externos/${id}`).loginVia(user).send().end()
 
   response.assertStatus(200) // NO CONTENT
   response.assertJSONSubset({
-    data_proc: "2019-11-10",
-    animal_id: "2",
-    propriedade: "algum lugar",
-    dist_prop: "Até 100km",
-    tipo_atendimento: "rebanho",
-    criado_por: "1"
+    data_proc,
+    animal_id,
+    propriedade,
+    dist_prop,
+    tipo_atendimento,
   })
 
 })
