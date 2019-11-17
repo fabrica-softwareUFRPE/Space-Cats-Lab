@@ -17,7 +17,9 @@
 const Route = use('Route')
 Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
+    Route.put('/users/update/:id', 'UserController.update')
 }).middleware('auth');
+
 
 Route.post('/login', 'SessionController.login').validator('Login')
 
@@ -38,7 +40,11 @@ Route.group(() => {
     Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly()
 
     //! Rotas do setor de Análises laboratoriais
-    Route.resource('planilhas/analises', 'AnaliseController').apiOnly() //.validator('Analises')
+    Route.resource('planilhas/analises', 'AnaliseController').apiOnly().validator(new Map([
+        [['planilhas/analises.store'], ['Analises']],
+        [['planilhas/analises.update'], ['Analises']]
+      ]))
+      
     //! Rotas do setor de Procedimentos Cirúrgicos
     Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly()
     //! Rotas do setor de Procedimentos Anestesicos
