@@ -38,7 +38,7 @@ Route.group(() => {
     Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly()
 
     //! Rotas do setor de Análises laboratoriais
-    Route.resource('planilhas/analises', 'AnaliseController').apiOnly()
+    Route.resource('planilhas/analises', 'AnaliseController').apiOnly() //.validator('Analises')
     //! Rotas do setor de Procedimentos Cirúrgicos
     Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly()
     //! Rotas do setor de Procedimentos Anestesicos
