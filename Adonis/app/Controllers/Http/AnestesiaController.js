@@ -41,7 +41,7 @@ class AnestesiaController {
 
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos1" })
     }
   }
 
@@ -71,11 +71,11 @@ class AnestesiaController {
         
       } else {
 
-        return response.status(400).send({ message: "Valores inválidos" })
+        return response.status(400).send({ message: "Valores inválidos2" })
       }
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos3" })
     }
 
 
@@ -99,7 +99,7 @@ class AnestesiaController {
 
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos4" })
     }
   }
   /**
@@ -129,12 +129,12 @@ class AnestesiaController {
         planilha.merge({ tecnicas: tecnicas_string, atualizado_por: auth.user.id, ...data}) //* Faz a modificação na planilha
         await planilha.save()
       } else {
-        return response.status(400).send({ message: "Valores inválidos" })
+        return response.status(400).send({ message: "Valores inválidos5" })
       }
         
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos6" })
     }
 
         
@@ -156,7 +156,7 @@ class AnestesiaController {
       await planilha.delete()
 
     } catch(error) {
-      response.status(400).send({message: "valores inválidos"})
+      response.status(400).send({message: "valores inválidos7"})
     }
 
   }

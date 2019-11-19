@@ -39,23 +39,42 @@ Route.group(() => {
     //! Rotas das predefinições
     Route.resource('planilhas/predefinicoes', 'PredefinicaoController').apiOnly()
 
-    //! Rotas do setor de Análises laboratoriais
+    //* Rotas do setor de Análises laboratoriais
     Route.resource('planilhas/analises', 'AnaliseController').apiOnly().validator(new Map([
         [['planilhas/analises.store'], ['Analises']],
         [['planilhas/analises.update'], ['Analises']]
       ]))
       
     //! Rotas do setor de Procedimentos Cirúrgicos
-    Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly()
+    Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly().validator(new Map([
+      [['planilhas/cirurgias.store'], ['Cirurgias']],
+      [['planilhas/cirurgias.update'], ['Cirurgias']]
+    ]))
     //! Rotas do setor de Procedimentos Anestesicos
-    Route.resource('planilhas/anestesias', 'AnestesiaController').apiOnly()
+    Route.resource('planilhas/anestesias', 'AnestesiaController').apiOnly().validator(new Map([
+      [['planilhas/anestesias.store'], ['Anestesias']],
+      [['planilhas/anestesias.update'], ['Anestesias']]
+    ]))
+
     //! Rotas do setor de Consultas/Retornos
-    Route.resource('planilhas/consultas', 'ConsultaController').apiOnly()
+    Route.resource('planilhas/consultas', 'ConsultaController').apiOnly().validator(new Map([
+      [['planilhas/consultas.store'], ['Consultas']],
+      [['planilhas/consultas.update'], ['Consultas']]
+    ]))
     //! Rotas do setor de Atendimentos externos a grandes animais
-    Route.resource('planilhas/externos', 'ExternoController').apiOnly()
+    Route.resource('planilhas/externos', 'ExternoController').apiOnly().validator(new Map([
+      [['planilhas/externos.store'], ['Externos']],
+      [['planilhas/externos.update'], ['Externos']]
+    ]))
     //! Rotas do setor de Necropsias
-    Route.resource('planilhas/necropsias', 'NecropsiaController').apiOnly()
+    Route.resource('planilhas/necropsias', 'NecropsiaController').apiOnly().validator(new Map([
+        [['planilhas/necropsias.store'], ['Necropsias']],
+        [['planilhas/necropsias.update'], ['Necropsias']]
+      ]))
     //! Rotas do setor de Diagnostico por imagem
-    Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly()
+    Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly().validator(new Map([
+      [['planilhas/diagnosticos.store'], ['Diagnosticos']],
+      [['planilhas/diagnosticos.update'], ['Diagnosticos']]
+    ]))
 
 }).middleware('auth')

@@ -33,7 +33,7 @@ class PredefinicaoController {
       return predefinicoes
       
     } catch(error) {
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos1" })
     }
 
   }
@@ -56,7 +56,7 @@ class PredefinicaoController {
       return predefinicao
 
     } catch(error) {
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos2" })
     }
 
   }
@@ -78,7 +78,7 @@ class PredefinicaoController {
       return predefinicao
 
     } catch(error) {
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos3" })
     }
   }
 
@@ -102,7 +102,7 @@ class PredefinicaoController {
       await predefinicao.save()
 
     } catch(eror) {
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos4" })
     }
   }
 
@@ -122,7 +122,7 @@ class PredefinicaoController {
       await predefinicao.delete()
 
     } catch(error) {
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos5" })
     }
 
   }
