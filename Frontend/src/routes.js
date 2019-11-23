@@ -5,7 +5,7 @@ import Login from './pages/LoginTest';
 import TabelaFuncionario from './pages/TabelaAdmFunc';
 import Home from './pages/Home';
 import ManageUsers from './pages/TableGerenciarUsersTest';
-import TabelaPlanilhaAdm from './pages/TabelaAdmPlanilhas';
+import TabelaPlanilhaAdm from './pages/TabelaP.Anestésicos P. Porte';
 
 export default function Routes(){
     return (

@@ -9,7 +9,13 @@ body {
     background-image: url("..//assets/bgLogin.svg");
     background-size: cover;
     background-position: 16vw;
+   
+    
+ 
+       
 }
+
+
 
 .sideBar {
     width: 16vw;
@@ -79,18 +85,6 @@ body {
     background-color: #1D5047;
     cursor: pointer;
     align-items: center;
-}
-
-.page-content {
-    height: 100%;
-    width: 84%;
-    display: flex;
-    padding: 5px 5px;
-}
-
-.table-wrapper {
-    height: 100%;
-    width: 100%;
 }
 
 .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {

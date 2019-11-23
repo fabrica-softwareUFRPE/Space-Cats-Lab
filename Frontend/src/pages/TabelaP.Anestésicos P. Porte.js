@@ -2,37 +2,41 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
 import Button from '@material-ui/core/Button';
-
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  KeyboardDatePicker
+} from '@material-ui/pickers'
 
 
 export default function TabelaPlanilhaAdm() {
+
+  
+
+  
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Nome', field: 'nome' },
-      { title: 'Login', field: 'login'},
-      { title: 'Senha', field: 'senha'},
-      { title: 'Email', field: 'email'},
+      { title: 'N', field: 'atendimento' },
+      { title: 'Data', field: 'Data', type: 'date' },
+      { title: 'Identificação/Ficha Paciente', field: 'ID'},
+      { title: 'Nome', field: 'Nome'},
+      { title: 'Espécie', field: 'Especie'},
+      { title: 'Técnicas Anestésicas', field: 'Tecnicas'},
+      
       {
-	    title: 'Função',
-        field: 'funcao',
-        lookup: { 1: 'Administrador(a)', 2: 'Professor', 3:"Residente" },
+	    title: 'Tipo do procedimento',
+        field: 'procedimento',
+        lookup: { 1: 'Simples', 2: 'Complexo'},
       },
     ],
     data: [
-      { nome: 'Eduardo 0', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 1', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 2', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 3', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 4', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 5', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 6', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 7', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 8', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 9', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      
+     {  atendimento: '01', Data: 111120 , ID: 123, Nome: 'nino', Tecnicas: 'abaco' ,procedimento: 1 },
+     
            
     ],
   });
+  
+ 
+
   
   return (
 
