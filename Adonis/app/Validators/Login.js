@@ -1,6 +1,11 @@
 'use strict'
 
 class Login {
+      
+  get validateAll () {
+    return true
+  }
+  
   get rules () {
     return {
     // validation rules

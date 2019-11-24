@@ -1,6 +1,11 @@
 'use strict'
 //*Validação do register
 class StoreUser {
+      
+  get validateAll () {
+    return true
+  }
+  
   get rules () {
     return {
       // validation rules

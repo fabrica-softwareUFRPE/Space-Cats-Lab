@@ -1,7 +1,12 @@
 'use strict'
 
 class Cirurgias {
-    get rules () {
+        
+  get validateAll () {
+    return true
+  }
+  
+  get rules () {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 

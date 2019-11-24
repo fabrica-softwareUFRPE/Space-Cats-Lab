@@ -3,6 +3,11 @@
 // import { validations } from 'indicative/validator'
 
 class Analises {
+  
+  get validateAll () {
+    return true
+  }
+  
   get rules () {
     return {
       data_proc:'required|date',

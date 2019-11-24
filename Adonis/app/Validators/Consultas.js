@@ -1,6 +1,11 @@
 'use strict'
 
 class Consultas {
+      
+  get validateAll () {
+    return true
+  }
+  
   get rules () {
     return {
       data_proc:'required|date',
