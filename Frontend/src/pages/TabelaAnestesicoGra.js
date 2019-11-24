@@ -8,9 +8,8 @@ import {
 } from '@material-ui/pickers'
 
 
-export default function TabelaPlanilhaAdm() {
+export default function TabelaAnestesicoGra() {
 
-  
 
   
   const [state, setState] = React.useState({
@@ -30,9 +29,8 @@ export default function TabelaPlanilhaAdm() {
     ],
     data: [
      {  atendimento: '01', Data: 111120 , ID: 123, Nome: 'nino', Tecnicas: 'abaco' ,procedimento: 1 },
-     
-           
-    ],
+               
+     ],
   });
   
  
@@ -86,7 +84,7 @@ export default function TabelaPlanilhaAdm() {
       <div className="page-content" >
         <div className="table-wrapper" >
           <MaterialTable 
-            title="Planilha Procedimetos Anestésicos Pequeno Porte"
+            title="Planilha Procedimetos Anestésicos Grande Porte"
             options={{
               rowStyle: {
                 height: 10,
