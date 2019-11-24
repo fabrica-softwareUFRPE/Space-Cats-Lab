@@ -1,18 +1,20 @@
-const data = [
+import api from "../services/api";
+import { login } from "../services/auth";
+
+/*const data = [
         {user: 'admin12', senha: '1212'},
         {user: 'teste123', senha:'123456'},
         {user: 'dog', senha: 'cat'},
-    ];
+];
+*/
 
-export const login = (username, password) => {
-        var x = data.find(x => x.user === username);
-        if( x !== undefined){
-            if(password === x.senha){
-                return true;
-            }
-        } else {
-            return false;
-        }
-
-
+export const loginAux = async (username, password) => {
+    try{
+        const response = await api.post("/login", {username, password});
+        console.log(response.data.token);
+        login(response.data.token);
+        return true;
+    } catch (err) {
+        return false;
+    }
 }

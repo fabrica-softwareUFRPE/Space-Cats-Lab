@@ -1,16 +1,12 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState } from 'react';
 import './LoginTest.css';
 import logo from '../assets/logo.png'
 import TextField from '@material-ui/core/TextField';
-//import IconButton from '@material-ui/core/IconButton';
-//import InputAdornment from '@material-ui/core/InputAdornment';
-//import AccountCircle from '@material-ui/icons/AccountCircle';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-//import InputLabel from '@material-ui/core/InputLabel';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import { login } from '../api/index';
+import api from "../services/api";
+import { loginAux } from '../api/index';
 
 export default function Login({ history }) {
     const [username, setUsername] = useState('');
@@ -21,13 +17,14 @@ export default function Login({ history }) {
     function handleSubmit (e) {
         e.preventDefault();
 
-        if(login(username, password)) {
-            history.push('/home');
-        } 
-        else if (username === '' || password === '') {
-            alert("Informações incompletas.");
+        if (!username || !password) {
+            alert("Preencha as informações para fazer o login!");
         } else {
-            alert("Usuário ou senha incorretos.");
+            if(loginAux(username, password)){
+                history.push('/home');
+            } else {
+                alert("Email ou senha incorretos. Verifique suas informações!")
+            }
         }
     }
 

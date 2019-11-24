@@ -2,7 +2,7 @@
 import React from 'react';
 import './Home.css';
 
-export default function Home( { history }) {
+export default function Home( { history } ) {
     function exitFunction (e) {
         history.push('/');
     }
@@ -11,7 +11,7 @@ export default function Home( { history }) {
         <div className="pageHome">
             <div className="sideBar">
                 <div className="headDiv">
-                    <p><center>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</center></p>
+                    <center><p>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</p></center>
                     <p>USERNAME</p>
                 </div>
                 <div className="naviDiv">
@@ -19,7 +19,7 @@ export default function Home( { history }) {
                         <li><div className="naviLine"/></li>
                         <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
                         <li><div className="naviLine"/></li>
-                        <div class="dropDown">
+                        <div className="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
                                 <ul>
                                     <li><button className="naviButtonCascade">para Pequenos Animais</button></li>
