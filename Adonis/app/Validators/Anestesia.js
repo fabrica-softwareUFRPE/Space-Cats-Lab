@@ -5,6 +5,18 @@ class Anestesia {
   get validateAll () {
     return true
   }
+
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim',
+      nome:'trim',
+      especie:'trim',
+      tecnicas:'trim',
+      tipo_proc:'trim',
+      tipo_animal:'trim'
+    }
+  }
   
   get rules () {
     return {
@@ -17,6 +29,7 @@ class Anestesia {
       tipo_animal:'required|alpha',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',

@@ -6,6 +6,13 @@ class Login {
     return true
   }
   
+  get sanitizationRules () {
+    return {
+     email:'trim',
+      password:'trim'
+    }
+  }
+
   get rules () {
     return {
     // validation rules
@@ -14,6 +21,7 @@ class Login {
       password: 'required',
     }
   }
+
   get messages () {
     return {
       'email.required': 'You must provide a email address.',

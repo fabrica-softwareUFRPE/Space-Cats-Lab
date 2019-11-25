@@ -6,6 +6,19 @@ class Consultas {
     return true
   }
   
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id:'trim',
+      nome:'trim',
+      especie:'trim',
+      area:'trim',
+      tipo_proc:'trim',
+      caso_novo:'trim',
+      retorno:'trim'
+    }
+  }
+
   get rules () {
     return {
       data_proc:'required|date',
@@ -18,6 +31,7 @@ class Consultas {
       retorno:'required|alpha',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',

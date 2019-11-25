@@ -6,6 +6,18 @@ class Diagnosticos {
     return true
   }
   
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id:'trim',
+      nome:'trim',
+      especie:'trim',
+      exames:'trim',
+      quant_simples:'trim',
+      quant_complexos:'trim'
+    }
+  }
+
   get rules () {
     return {
       data_proc:'required|date',
@@ -17,6 +29,7 @@ class Diagnosticos {
       quant_complexos:'required|regex:^[0-9]+$',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',
