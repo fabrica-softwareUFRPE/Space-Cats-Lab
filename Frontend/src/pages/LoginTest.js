@@ -25,7 +25,6 @@ export default function Login({ history }) {
                 login(response.data.token);
                 history.push("/home");
             } catch (err) {
-                console.log(err);
                 alert("Usuário ou senha incorretos. Verifique suas informações!");
             }
         }

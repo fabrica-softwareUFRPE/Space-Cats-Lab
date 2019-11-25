@@ -28,9 +28,7 @@ export default function TabelaFuncionario() {
       { nome: 'Eduardo 6', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
       { nome: 'Eduardo 7', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
       { nome: 'Eduardo 8', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 9', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      
-           
+      { nome: 'Eduardo 9', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },  
     ],
   });
   
