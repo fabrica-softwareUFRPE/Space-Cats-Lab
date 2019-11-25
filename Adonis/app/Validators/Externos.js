@@ -1,6 +1,21 @@
 'use strict'
 
 class Externos {
+      
+  get validateAll () {
+    return true
+  }
+  
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim',
+      propiedade:'trim',
+      dist_prop:'trim',
+      tipo_atendimento:'trim'  
+    }
+  }
+
   get rules () {
     return {
       data_proc:'required|date',
@@ -11,6 +26,7 @@ class Externos {
       
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',

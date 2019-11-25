@@ -1,7 +1,25 @@
 'use strict'
 
 class Cirurgias {
-    get rules () {
+        
+  get validateAll () {
+    return true
+  }
+  
+
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim',
+      nome:'trim',
+      especie:'trim',
+      procedimentos:'trim',
+      quant_simples:'trim',
+      quant_complexos:'trim'
+    }
+  }
+  
+  get rules () {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
@@ -12,6 +30,7 @@ class Cirurgias {
       quant_complexos:'required|regex:^[0-9]+$',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',

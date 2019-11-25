@@ -1,6 +1,21 @@
 'use strict'
 
 class Necropsias {
+      
+  get validateAll () {
+    return true
+  }
+  
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim',
+      nome:'trim',
+      especie:'trim',
+      peso:'trim'
+    }
+  }
+
   get rules () {
     return {
       // validation rules
@@ -11,6 +26,7 @@ class Necropsias {
       peso:'required',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',

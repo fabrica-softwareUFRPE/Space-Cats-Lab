@@ -3,6 +3,24 @@
 // import { validations } from 'indicative/validator'
 
 class Analises {
+  
+  get validateAll () {
+    return true
+  }
+
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim', 
+      nome:'trim',
+      especie:'trim',
+      procedimentos:'trim',
+      quant_simples:'trim',
+      quant_complexos:'trim',
+      analise_tipo:'trim'
+    }
+  }
+  
   get rules () {
     return {
       data_proc:'required|date',
@@ -15,6 +33,7 @@ class Analises {
       analise_tipo:'required|alpha'
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',
