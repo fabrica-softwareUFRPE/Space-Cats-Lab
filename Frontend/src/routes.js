@@ -11,12 +11,17 @@ import TabelaAnestesicoSil from './pages/TabelaAnestesicoSil';
 import TabelaConsultaPeq from './pages/TabelaPConsultaRetornoPeq';
 import TabelaConsultaGra from './pages/TabelaPConsultaRetornoGra';
 import TabelaConsultaSil from './pages/TabelaPConsultaRetornoSil';
-
 import TabelaAnalisesLabBac from './pages/TabelaAnalisesLabBac';
 import TabelaAnalisesLabPar from './pages/TabelaAnalisesLabPar';
 import TabelaAnalisesLabPatCli from './pages/TabelaAnalisesLabPatCli';
-import TabelaAnalisesLabPatVet from './pages/TabelaAnalisesLabPatVet';
+import TabelaAnalisesLabPatVet from './pages/TabelaAnalisesLabPatVet'; 
 import TabelaAnalisesLabRep from './pages/TabelaAnalisesLabRep';
+import TabelaAtendiGra from './pages/TabelaPAtendiExtAGraAnimais';
+import TabelaProcediDiagImagem from './pages/TabelaPProcediDiagImagem';
+import TabelaNecropsias from './pages/TabelaPNecropsias';
+import TabelaCirurgiaGrande from './pages/TabelaPProcedimentoCirurgicoGra';
+import TabelaCirurgiaPequeno from './pages/TabelaPProcedimentoCirurgicoPeq';
+import TabelaCirurgiaSilvestre from './pages/TabelaPProcedimentoCirurgicoSil';
 
 
 export default function Routes(){
@@ -37,6 +42,12 @@ export default function Routes(){
             <Route path = "/tableConsultaPeq" component = {TabelaConsultaPeq}/>
             <Route path = "/tableConsultaGra" component = {TabelaConsultaGra}/>
             <Route path = "/tableConsultaSil" component = {TabelaConsultaSil}/>
+            <Route path = "/tableAtendimentoExterno" component = {TabelaAtendiGra}/>
+            <Route path = "/tableProcedimentoImagem" component = {TabelaProcediDiagImagem}/>
+            <Route path = "/tableNecropsias" component ={TabelaNecropsias}/>
+            <Route path = "/tableCirurgiaGrande" component = {TabelaCirurgiaGrande}/>
+            <Route path = "/tableCirurgiaPequeno" component = {TabelaCirurgiaPequeno}/>
+            <Route path = "/tableCirurgiaSilvestre" component = {TabelaCirurgiaSilvestre}/>
         </BrowserRouter>
     );
 }
