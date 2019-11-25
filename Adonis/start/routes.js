@@ -52,8 +52,8 @@ Route.group(() => {
     ]))
     //! Rotas do setor de Procedimentos Anestesicos
     Route.resource('planilhas/anestesias', 'AnestesiaController').apiOnly().validator(new Map([
-      [['planilhas/anestesias.store'], ['Anestesias']],
-      [['planilhas/anestesias.update'], ['Anestesias']]
+      [['planilhas/anestesias.store'], ['Anestesia']],
+      [['planilhas/anestesias.update'], ['Anestesia']]
     ]))
 
     //* Rotas do setor de Consultas/Retornos
