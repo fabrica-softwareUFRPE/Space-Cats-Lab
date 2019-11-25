@@ -6,18 +6,32 @@ class Consultas {
     return true
   }
   
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id:'trim',
+      nome:'trim',
+      especie:'trim',
+      area:'trim',
+      tipo_proc:'trim',
+      caso_novo:'trim',
+      retorno:'trim'
+    }
+  }
+
   get rules () {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
       nome:'required|alpha',
       especie:'required|alpha',
-      area:'required|alpha', //talvez array?
+      area:'required', 
       tipo_proc:'required|alpha',
-      caso_novo:'required|alpha',
-      retorno:'required|alpha',
+      caso_novo:'required',
+      retorno:'required',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',
@@ -29,13 +43,10 @@ class Consultas {
       'especie.required':'7',
       'especie.alpha':'8',
       'area.required':'9',
-      'area.alpha':'10',
-      'tipo_proc.required':'11',
-      'tipo_proc.alpha':'12',
-      'caso_novo.required':'13',
-      'caso_novo.alpha':'14',
-      'retorno.required':'15',
-      'retorno.alpha':'16',
+      'tipo_proc.required':'10',
+      'tipo_proc.alpha':'11',
+      'caso_novo.required':'12',
+      'retorno.required':'13',
     }
   }
 }

@@ -5,18 +5,31 @@ class Anestesia {
   get validateAll () {
     return true
   }
+
+  get sanitizationRules () {
+    return {
+      data_proc:'trim',
+      animal_id: 'trim',
+      nome:'trim',
+      especie:'trim',
+      tecnicas:'trim',
+      tipo_proc:'trim',
+      tipo_animal:'trim'
+    }
+  }
   
   get rules () {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
-      nome:'required|alpha',
-      especie:'required|alpha',
-      tecnicas:'required|alpha', //talvez array?
+      nome:'required',
+      especie:'required',
+      tecnicas:'required|array', //talvez array?
       tipo_proc:'required|alpha',
       tipo_animal:'required|alpha',
     }
   }
+
   get messages () {
     return {
       'data_proc.required':'1',
