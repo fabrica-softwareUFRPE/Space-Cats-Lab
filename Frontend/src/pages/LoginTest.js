@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import api from "../services/api";
-import { loginAux } from '../api/index';
+import { login } from "../services/auth";
 
 export default function Login({ history }) {
     const [username, setUsername] = useState('');
@@ -14,16 +14,19 @@ export default function Login({ history }) {
 
 
 
-    function handleSubmit (e) {
+    async function handleSubmit (e) {
         e.preventDefault();
 
         if (!username || !password) {
             alert("Preencha as informações para fazer o login!");
         } else {
-            if(loginAux(username, password)){
-                history.push('/home');
-            } else {
-                alert("Email ou senha incorretos. Verifique suas informações!")
+            try {
+                const response = await api.post("/login", { "email": username, "password": password });
+                login(response.data.token);
+                history.push("/home");
+            } catch (err) {
+                console.log(err);
+                alert("Usuário ou senha incorretos. Verifique suas informações!");
             }
         }
     }

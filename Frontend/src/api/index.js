@@ -10,7 +10,7 @@ import { login } from "../services/auth";
 
 export const loginAux = async (username, password) => {
     try{
-        const response = await api.post("/login", {username, password});
+        const response = await api.post("/login", { email: username, password: password });
         console.log(response.data.token);
         login(response.data.token);
         return true;
