@@ -5,7 +5,7 @@ class Login {
     return {
     // validation rules
      //email: 'required|email|exists:user,email',
-     email: 'required|email',
+      email: 'required|email',
       password: 'required',
     }
   }

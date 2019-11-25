@@ -5,9 +5,9 @@ class Anestesia {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
-      nome:'required|alpha',
-      especie:'required|alpha',
-      tecnicas:'required|alpha', //talvez array?
+      nome:'required',
+      especie:'required',
+      tecnicas:'required|array', //talvez array?
       tipo_proc:'required|alpha',
       tipo_animal:'required|alpha',
     }

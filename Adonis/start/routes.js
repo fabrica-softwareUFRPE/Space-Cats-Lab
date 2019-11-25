@@ -45,7 +45,7 @@ Route.group(() => {
         [['planilhas/analises.update'], ['Analises']]
       ]))
       
-    //! Rotas do setor de Procedimentos Cirúrgicos
+    //* Rotas do setor de Procedimentos Cirúrgicos
     Route.resource('planilhas/cirurgias', 'CirurgiaController').apiOnly().validator(new Map([
       [['planilhas/cirurgias.store'], ['Cirurgias']],
       [['planilhas/cirurgias.update'], ['Cirurgias']]
@@ -56,22 +56,22 @@ Route.group(() => {
       [['planilhas/anestesias.update'], ['Anestesias']]
     ]))
 
-    //! Rotas do setor de Consultas/Retornos
+    //* Rotas do setor de Consultas/Retornos
     Route.resource('planilhas/consultas', 'ConsultaController').apiOnly().validator(new Map([
       [['planilhas/consultas.store'], ['Consultas']],
       [['planilhas/consultas.update'], ['Consultas']]
     ]))
-    //! Rotas do setor de Atendimentos externos a grandes animais
+    //* Rotas do setor de Atendimentos externos a grandes animais
     Route.resource('planilhas/externos', 'ExternoController').apiOnly().validator(new Map([
       [['planilhas/externos.store'], ['Externos']],
       [['planilhas/externos.update'], ['Externos']]
     ]))
-    //! Rotas do setor de Necropsias
+    //* Rotas do setor de Necropsias
     Route.resource('planilhas/necropsias', 'NecropsiaController').apiOnly().validator(new Map([
         [['planilhas/necropsias.store'], ['Necropsias']],
         [['planilhas/necropsias.update'], ['Necropsias']]
       ]))
-    //! Rotas do setor de Diagnostico por imagem
+    //* Rotas do setor de Diagnostico por imagem
     Route.resource('planilhas/diagnosticos', 'DiagnosticoController').apiOnly().validator(new Map([
       [['planilhas/diagnosticos.store'], ['Diagnosticos']],
       [['planilhas/diagnosticos.update'], ['Diagnosticos']]

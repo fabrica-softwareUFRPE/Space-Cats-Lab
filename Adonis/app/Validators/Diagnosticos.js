@@ -5,8 +5,8 @@ class Diagnosticos {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
-      nome:'required|alpha',
-      especie:'required|alpha',
+      nome:'required', 
+      especie:'required',
       exames:'required|array',
       quant_simples:'required|regex:^[0-9]+$',
       quant_complexos:'required|regex:^[0-9]+$',

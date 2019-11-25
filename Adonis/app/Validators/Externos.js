@@ -5,8 +5,8 @@ class Externos {
     return {
       data_proc:'required|date',
       animal_id: 'required|regex:^[0-9]+$', 
-      propiedade:'required|alpha',
-      dist_prop:'required|alpha',
+      propriedade:'required',
+      dist_prop:'required',
       tipo_atendimento:'required|alpha',
       
     }
@@ -18,11 +18,9 @@ class Externos {
       'animal_id.required':'3',
       'animal_id.regex':'4',
       'propriedade.required':'5',
-      'propriedade.alpha':'6',
-      'dist_prop.required':'7',
-      'dist_prop.alpha':'8',
-      'tipo_atendimento.required':'9',
-      'tipo_atendimento.alpha':'10',
+      'dist_prop.required':'6',
+      'tipo_atendimento.required':'7',
+      'tipo_atendimento.alpha':'8',
     
     }
   }
