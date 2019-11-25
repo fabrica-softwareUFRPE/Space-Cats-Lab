@@ -22,6 +22,7 @@ import TabelaNecropsias from './pages/TabelaPNecropsias';
 import TabelaCirurgiaGrande from './pages/TabelaPProcedimentoCirurgicoGra';
 import TabelaCirurgiaPequeno from './pages/TabelaPProcedimentoCirurgicoPeq';
 import TabelaCirurgiaSilvestre from './pages/TabelaPProcedimentoCirurgicoSil';
+import pdf from './pages/imprimirtabela';
 
 
 export default function Routes(){
@@ -48,6 +49,7 @@ export default function Routes(){
             <Route path = "/tableCirurgiaGrande" component = {TabelaCirurgiaGrande}/>
             <Route path = "/tableCirurgiaPequeno" component = {TabelaCirurgiaPequeno}/>
             <Route path = "/tableCirurgiaSilvestre" component = {TabelaCirurgiaSilvestre}/>
+            <Route path = "/pdf" component = {pdf}/>
         </BrowserRouter>
     );
 }
