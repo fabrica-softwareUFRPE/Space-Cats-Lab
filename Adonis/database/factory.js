@@ -12,10 +12,25 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+const Factory = use('Factory')
+const Hash = use('Hash')
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+Factory.blueprint('App/Models/User', async (faker) => {
+  return {
+    username: faker.username(),
+    email: faker.email(),
+    password: await Hash.make(faker.password()),
+    id: faker.cpf()
+  }
+})
+
+Factory.blueprint('App/Models/Externo', (faker, i, data) => {
+  return {
+    data_proc: faker.date({ string: true }),
+    animal_id: faker.string({ length: 11 }),
+    propriedade: faker.city(),
+    dist_prop: "Até 100km",
+    tipo_atendimento: "rebanho"
+  }
+})
+

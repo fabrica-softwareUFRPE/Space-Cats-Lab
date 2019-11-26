@@ -41,7 +41,7 @@ class CirurgiaController {
 
     } catch(error) {
 
-      return response.status(400).send({ message: "Valor inválido" })
+      return response.status(400).send({ message: "Valores inválidos" })
     }
 
   }
@@ -53,20 +53,20 @@ class CirurgiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
 
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     //TODO adicionar o campo criado_por  no request.except
     
     try {
 
-      const { procedimentos, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+      const { procedimentos, ...data } = request.except(["criado_por", 'criado_em', 'atualizado_por', 'atualizado_em']) 
       
       const bool = await Predefinicao.validaPredefinicoes(procedimentos, 'cirurgias')
       
       if (await bool === true) {
         const procedimentos_string = procedimentos.join(", ")
-        const planilha = await Cirurgia.create({ procedimentos: procedimentos_string, ...data })
+        const planilha = await Cirurgia.create({ procedimentos: procedimentos_string, criado_por: auth.user.id, ...data })
         return planilha
         
       } else {
@@ -110,14 +110,14 @@ class CirurgiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
 
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
     //TODO retirar atualizado_por de request.except(...)
     
     try {
       
-      const { procedimentos, ...data } = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+      const { procedimentos, ...data } = request.except(["atualizado_por", "tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
   
       const bool = await Predefinicao.validaPredefinicoes(procedimentos, 'cirurgias')
       const planilha = await Cirurgia.findOrFail(params.id) //* capturando a planilha desejada
@@ -126,7 +126,7 @@ class CirurgiaController {
   
         const procedimentos_string = procedimentos.join(", ")
   
-        planilha.merge({ procedimentos: procedimentos_string, ...data}) //* Faz a modificação na planilha
+        planilha.merge({ procedimentos: procedimentos_string, atualizado_por: auth.user.id, ...data}) //* Faz a modificação na planilha
         await planilha.save()
       } else {
         return response.status(400).send({ message: "Valores inválidos" })
@@ -156,7 +156,7 @@ class CirurgiaController {
       await planilha.delete()
 
     } catch(error) {
-      response.status(400).send({message: "Dados inválidos"})
+      response.status(400).send({message: "valores inválidos"})
     }
 
   }

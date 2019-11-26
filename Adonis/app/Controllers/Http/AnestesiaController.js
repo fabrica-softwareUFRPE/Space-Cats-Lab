@@ -41,7 +41,7 @@ class AnestesiaController {
 
     } catch(error) {
 
-      return response.status(400).send({ message: "Valor inválido" })
+      return response.status(400).send({ message: "Valores inválidos1" })
     }
   }
 
@@ -53,29 +53,29 @@ class AnestesiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
 
     //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
     //TODO adicionar o campo criado_por  no request.except
     
     try {
 
-      const { tecnicas, ...data } = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+      const { tecnicas, ...data } = request.except(["criado_por", 'criado_em', 'atualizado_por', 'atualizado_em']) 
       
       const bool = await Predefinicao.validaPredefinicoes(tecnicas, 'anestesias')
       
       if (await bool === true) {
         const tecnicas_string = tecnicas.join(", ")
-        const planilha = await Anestesia.create({ tecnicas: tecnicas_string, ...data })
+        const planilha = await Anestesia.create({ tecnicas: tecnicas_string, criado_por: auth.user.id, ...data })
         return planilha
         
       } else {
 
-        return response.status(400).send({ message: "Valores inválido" })
+        return response.status(400).send({ message: "Valores inválidos2" })
       }
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos3" })
     }
 
 
@@ -99,7 +99,7 @@ class AnestesiaController {
 
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos4" })
     }
   }
   /**
@@ -110,14 +110,14 @@ class AnestesiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
 
     //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
     //TODO retirar atualizado_por de request.except(...)
     
     try {
       
-      const { tecnicas, ...data } = request.except(["tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+      const { tecnicas, ...data } = request.except(["atualizado_por", "tipo_animal", "criado_por", "criado_em", "atualizado_por", "atualizado_em"])
   
       const bool = await Predefinicao.validaPredefinicoes(tecnicas, 'anestesias')
       const planilha = await Anestesia.findOrFail(params.id) //* capturando a planilha desejada
@@ -126,15 +126,15 @@ class AnestesiaController {
   
         const tecnicas_string = tecnicas.join(", ")
   
-        planilha.merge({ tecnicas: tecnicas_string, ...data}) //* Faz a modificação na planilha
+        planilha.merge({ tecnicas: tecnicas_string, atualizado_por: auth.user.id, ...data}) //* Faz a modificação na planilha
         await planilha.save()
       } else {
-        return response.status(400).send({ message: "Valores inválidos" })
+        return response.status(400).send({ message: "Valores inválidos5" })
       }
         
     } catch(error) {
 
-      return response.status(400).send({ message: "Valores inválidos" })
+      return response.status(400).send({ message: "Valores inválidos6" })
     }
 
         
@@ -156,7 +156,7 @@ class AnestesiaController {
       await planilha.delete()
 
     } catch(error) {
-      response.status(400).send({message: "Dados inválidos"})
+      response.status(400).send({message: "valores inválidos7"})
     }
 
   }

@@ -1,10 +1,25 @@
 'use strict'
 //*Validação do register
 class StoreUser {
+      
+  get validateAll () {
+    return true
+  }
+  
+  get sanitizationRules () {
+    return {
+      id:'trim',
+      username:'trim',
+      email:'trim|normalize_email',
+      password:'trim',
+      setores:'trim'
+    }
+  }
+
   get rules () {
     return {
       // validation rules
-      id:'required|unique:users ',
+      id:'required|unique:users|validarCpf ',
       username:'required  ',
       email: 'required|email|unique:users ',
       password: 'required',

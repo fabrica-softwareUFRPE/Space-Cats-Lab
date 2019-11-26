@@ -21,18 +21,24 @@ class NecropsiaController {
    * @param {View} ctx.view
    */
   async index ({ request, response }) {
-
+    
     //* Não vamos listar todas as linhas da planilha de uma vez só
     //* Para isto, vamos utilizar paginação
     //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-    const { page } = request.only(["page"]) 
+    
+    try {
+      const { page } = request.only(["page"]) 
+  
+      const planilha = await Database
+      .table('necropsias')
+      .orderBy('id', 'cresc')
+      .forPage(page, 10) //! Buscando em grupos de 10
+  
+      return planilha
 
-    const planilha = await Database
-    .table('necropsias')
-    .orderBy('id', 'cresc')
-    .forPage(page, 10) //! Buscando em grupos de 10
-
-    return planilha
+    } catch(erro) {
+      return response.status(400).send({ message: "Valores inválidos1" })
+    }
   }
 
   /**
@@ -43,14 +49,19 @@ class NecropsiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, auth }) {
 
-    //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+    try {
+      //! estes campos não são preenchidos pelo usuário: criado_em, atualizado_por ...
+      const data = request.except(['criado_em', 'atualizado_por', 'atualizado_em']) 
+  
+      const planilha = await Necropsia.create({ criado_por: auth.user.id, ...data})
+  
+      return planilha
 
-    const planilha = await Necropsia.create(data)
-
-    return planilha
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos2" })
+    }
   }
 
   /**
@@ -64,9 +75,14 @@ class NecropsiaController {
    */
   async show ({ params, request, response }) {
 
-    const data = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
+    try {
+      const data = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
+  
+      return data
 
-    return data
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos3" })
+    }
   }
 
   /**
@@ -77,15 +93,20 @@ class NecropsiaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
 
-    //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
-    const data = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+    try {
+      //! estes campos não são atualizados pelo usuário: criado_em, atualizado_por ...
+      const data = request.except(["criado_por", "criado_em", "atualizado_por", "atualizado_em"])
+  
+      const planilha = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
+  
+      planilha.merge({ atualizado_por: auth.user.id, ...data}) //* Faz a modificação na planilha
+      await planilha.save()
 
-    const planilha = await Necropsia.findOrFail(params.id) //* capturando a planilha desejada
-
-    planilha.merge(data) //* Faz a modificação na planilha
-    await planilha.save()
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos4" })
+    }
   }
 
   /**
@@ -98,9 +119,14 @@ class NecropsiaController {
    */
   async destroy ({ params, request, response }) {
 
-    const planilha = await Necropsia.findOrFail(params.id)
+    try {
+      const planilha = await Necropsia.findOrFail(params.id)
+  
+      await planilha.delete()
 
-    await planilha.delete()
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos5" })
+    }
   }
 }
 

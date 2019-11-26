@@ -22,14 +22,20 @@ class PredefinicaoController {
    */
   async index ({ request, response }) {
 
-    const { setor } = request.only(['setor'])
+    try {
+      const { setor } = request.only(['setor'])
+  
+      const predefinicoes = await Database
+        .from('predefinicoes')
+        .where('setor', setor)
+        //.pluck('predefinicoes')
+  
+      return predefinicoes
+      
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos1" })
+    }
 
-    const predefinicoes = await Database
-      .from('predefinicoes')
-      .where('setor', setor)
-      //.pluck('predefinicoes')
-
-    return predefinicoes
   }
 
   /**
@@ -42,11 +48,17 @@ class PredefinicaoController {
    */
   async store ({ request, response }) {
 
-    const data = request.only(['setor', 'palavra'])
+    try {
+      const data = request.only(['setor', 'palavra'])
+  
+      const predefinicao = await Predefinicao.create(data)
+  
+      return predefinicao
 
-    const predefinicao = await Predefinicao.create(data)
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos2" })
+    }
 
-    return predefinicao
   }
 
   /**
@@ -60,9 +72,14 @@ class PredefinicaoController {
    */
   async show ({ params, request, response }) {
 
-    const predefinicao = await Predefinicao.findOrFail(params.id)
+    try {
+      const predefinicao = await Predefinicao.findOrFail(params.id)
+  
+      return predefinicao
 
-    return predefinicao
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos3" })
+    }
   }
 
   /**
@@ -75,13 +92,18 @@ class PredefinicaoController {
    */
   async update ({ params, request, response }) {
 
-    const data = request.only(['palavra', 'setor'])
+    try {
+      const data = request.only(['palavra', 'setor'])
+  
+      const predefinicao = await Predefinicao.findOrFail(params.id)
+  
+      predefinicao.merge(data)
+      
+      await predefinicao.save()
 
-    const predefinicao = await Predefinicao.findOrFail(params.id)
-
-    predefinicao.merge(data)
-    
-    await predefinicao.save()
+    } catch(eror) {
+      return response.status(400).send({ message: "Valores inválidos4" })
+    }
   }
 
   /**
@@ -94,9 +116,15 @@ class PredefinicaoController {
    */
   async destroy ({ params, request, response }) {
 
-    const predefinicao = await Predefinicao.findOrFail(params.id)
+    try {
+      const predefinicao = await Predefinicao.findOrFail(params.id)
+  
+      await predefinicao.delete()
 
-    await predefinicao.delete()
+    } catch(error) {
+      return response.status(400).send({ message: "Valores inválidos5" })
+    }
+
   }
 }
 
