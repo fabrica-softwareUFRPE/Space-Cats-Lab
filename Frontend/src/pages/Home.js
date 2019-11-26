@@ -1,10 +1,83 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React from 'react';
 import './Home.css';
+import SideBar from './SideBarRoutes'
 
-export default function Home( { history }) {
+export default function Home( { history }) { 
+    
     function exitFunction (e) {
         history.push('/');
+    }
+
+    function consultaGrande(e){
+        history.push('/tableConsultaGra')
+    }
+
+    function consultaSilvestre(e){
+        history.push('/tableConsultaSil');
+    }
+
+    function consultaPequeno (e) {
+
+        history.push('/tableConsultaPeq');    
+    }
+
+    function ProceImagem (e) {
+
+        history.push('/tableProcedimentoImagem');
+    }
+
+    function cirurgiaGrande (e) {
+
+        history.push('/tableCirurgiaGrande');
+    }
+
+    function cirurgiaPequeno (e) {
+
+        history.push('/tableCirurgiaPequeno');
+    }
+
+    function cirurgiaSilvestre (e) {
+
+        history.push('/tableCirurgiaSilvestre');
+    }
+
+    function anestesiaPequeno (e){
+        history.push('/tableAnestesicoPeq')
+    }
+    function anestesiaGrande (e){
+        history.push('/tableAnestesicoGra')
+    }
+    function anestesiaSilvestre (e){
+        history.push('/tableAnestesicoSil')
+    }
+
+    function necropsias (e){
+        history.push('/tableNecropsias')
+    }
+
+    function analisesLabBac(e){
+        history.push('/tableAnalisesLabBac')
+    }
+
+    function analisesLabPar(e){
+        history.push('/tableAnalisesLabPar')
+    }
+
+    function analisesLabPatCli(e){
+        history.push('/tableAnalisesLabPatCli')
+    }
+
+    function analisesLabPatVet(e){
+        history.push('/tableAnalisesLabPatVet')
+    }
+
+    function analisesLabRep(e){
+        history.push('/tableAnalisesLabRep')
+    }
+
+    function atendimentoExt(e){
+        history.push('/tableAtendimentoExterno')
     }
 
     return(
@@ -22,9 +95,9 @@ export default function Home( { history }) {
                         <div class="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
                                 <ul>
-                                    <li><button className="naviButtonCascade">para Pequenos Animais</button></li>
-                                    <li><button className="naviButtonCascade">para Grandes Animais</button></li>
-                                    <li><button className="naviButtonCascade">para Animais Silvestres</button></li>
+                                    <li><button className="naviButtonCascade" onClick={consultaPequeno} >para Pequenos Animais</button></li>
+                                    <li><button className="naviButtonCascade" onClick={consultaGrande} >para Grandes Animais</button></li>
+                                    <li><button className="naviButtonCascade" onClick={consultaSilvestre} >para Animais Silvestres</button></li>
                                 </ul>
                             </li>
                         </div>
@@ -34,9 +107,9 @@ export default function Home( { history }) {
                         <div className="dropDown">
                             <li><button className="naviButton" id="naviButton4">Procedimentos Cirúrgicos</button>
                                 <ul>
-                                    <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
-                                    <li><button className="naviButtonCascade">em Grandes Animais</button></li>
-                                    <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                                    <li><button className="naviButtonCascade"onClick={cirurgiaPequeno}>em Pequenos Animais</button></li>
+                                    <li><button className="naviButtonCascade"onClick={cirurgiaGrande}>em Grandes Animais</button></li>
+                                    <li><button className="naviButtonCascade"onClick={cirurgiaSilvestre}>em Animais Silvestres</button></li>
                                 </ul>
                             </li>
                         </div>
@@ -44,9 +117,9 @@ export default function Home( { history }) {
                         <div className="dropDown">
                         <li><button className="naviButton" id="naviButton5">Procedimentos Anestésicos</button>
                             <ul>
-                                <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
-                                <li><button className="naviButtonCascade">em Grandes Animais</button></li>
-                                <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                                <li><button className="naviButtonCascade"onClick={anestesiaPequeno}>em Pequenos Animais</button></li>
+                                <li><button className="naviButtonCascade"onClick={anestesiaGrande}>em Grandes Animais</button></li>
+                                <li><button className="naviButtonCascade"onClick={anestesiaSilvestre}>em Animais Silvestres</button></li>
                             </ul>
                         </li>
                         </div>
@@ -54,18 +127,18 @@ export default function Home( { history }) {
                         <div className="dropDown">
                         <li><button className="naviButton" id="naviButton6">Análises Laboratoriais</button>
                             <ul>
-                                <li><button className="naviButtonCascade">Bacteriose/Virose/Micológico</button></li>
-                                <li><button className="naviButtonCascade">Parasitas</button></li>
-                                <li><button className="naviButtonCascade">Patologia Clínica</button></li>
-                                <li><button className="naviButtonCascade">Patologia Veterinária</button></li>
-                                <li><button className="naviButtonCascade">Reprodução</button></li>
+                                <li><button className="naviButtonCascade"onClick={analisesLabBac}>Bacteriose/Virose/Micológico</button></li>
+                                <li><button className="naviButtonCascade"onClick={analisesLabPar}>Parasitas</button></li>
+                                <li><button className="naviButtonCascade"onClick={analisesLabPatCli}>Patologia Clínica</button></li>
+                                <li><button className="naviButtonCascade"onClick={analisesLabPatVet}>Patologia Veterinária</button></li>
+                                <li><button className="naviButtonCascade"onClick={analisesLabRep}>Reprodução</button></li>
                             </ul>
                         </li>
                         </div>
                         <li><div className="naviLine"/></li>
-                        <li><button className="naviButton" id="naviButton7">Necropsias</button></li>
+                        <li><button className="naviButton" id="naviButton7" onClick={necropsias}>Necropsias</button></li>
                         <li><div className="naviLine"/></li>
-                        <li><button className="naviButton" id="naviButton8">Atendimentos Externos <br></br>a Grandes Animais</button></li>
+                        <li><button className="naviButton" id="naviButton8" onClick={atendimentoExt}>Atendimentos Externos <br></br>a Grandes Animais</button></li>
                         <li><div className="naviLine"/></li>
                         <li><button className="naviButton" id="naviButton9">Imprimir Relatório Mensal</button></li>
                         <li><div className="naviLine"/></li>

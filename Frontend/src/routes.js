@@ -22,16 +22,17 @@ import TabelaNecropsias from './pages/TabelaPNecropsias';
 import TabelaCirurgiaGrande from './pages/TabelaPProcedimentoCirurgicoGra';
 import TabelaCirurgiaPequeno from './pages/TabelaPProcedimentoCirurgicoPeq';
 import TabelaCirurgiaSilvestre from './pages/TabelaPProcedimentoCirurgicoSil';
-import pdf from './pages/imprimirtabela';
+//import pdf from './pages/imprimirtabela';
 
+import PrivateRoute from './components/PrivateRoute'
 
 export default function Routes(){
     return (
         <BrowserRouter>
             <Route path = "/" exact component = {Login} />
             <Route path = "/home" component = {Home} isPrivate />
-            <Route path = "/table" component = {TabelaFuncionario} isPrivate />
-            <Route path = "/tableusers" component = {ManageUsers} isPrivate />
+            <Route path = "/table" component = {TabelaFuncionario} />
+            <Route path = "/tableusers" component = {ManageUsers} />
             <Route path = "/tableAnestesicoPeq" component = {TabelaAnestesicoPeq} />
             <Route path = "/tableAnestesicoGra" component = {TabelaAnestesicoGra} />
             <Route path = "/tableAnestesicoSil" component = {TabelaAnestesicoSil} />             
@@ -49,7 +50,7 @@ export default function Routes(){
             <Route path = "/tableCirurgiaGrande" component = {TabelaCirurgiaGrande}/>
             <Route path = "/tableCirurgiaPequeno" component = {TabelaCirurgiaPequeno}/>
             <Route path = "/tableCirurgiaSilvestre" component = {TabelaCirurgiaSilvestre}/>
-            <Route path = "/pdf" component = {pdf}/>
+           
         </BrowserRouter>
     );
 }

@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-export default function TabelaConsultaGra() {
+export default function TabelaAtendiGra() {
   const [state, setState] = React.useState({
     columns: [
       { title: 'N°', field: 'n' },
