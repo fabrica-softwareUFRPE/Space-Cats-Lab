@@ -24,13 +24,19 @@ class UserController {
         return user
     }
 
-    async indexUsers() {
-      const users = await User.query().with('setores').fetch()
+    async indexUsers({ response }) {
 
-      return users
+      try {
+        const users = await User.query().with('setores').fetch()
+  
+        return users
+
+      } catch(error) {
+        return response.status(400).send({ message: "Valores inválidos" })
+      }
     }
 
-    async indexSectorsOfUser({ params }) {
+    async indexSectorsOfUser({ params, response }) {
       const user = await User.findOrFail(params.id) // capturando usuário
 
       const setores = await user.setores().fetch() // capturando os setores do usuário
@@ -38,43 +44,62 @@ class UserController {
       return setores
     }
 
-    async show({ params }) {
-      const user = await User.findOrFail(params.id)
+    async show({ params, response }) {
 
-      await user.loadMany(['setores'])
+      try {
+        const user = await User.findOrFail(params.id)
+  
+        await user.loadMany(['setores'])
+  
+        return user
 
-      return user
+      } catch(error) {
+        return response.status(400).send({ message: "Valores inválidos" })
+      }
+      
     }
 
-    async update({ params, request, auth }) {
-      const user = await User.findOrFail(params.id)
+    async update({ params, request, auth, response }) {
 
-      const { setores, ...data } = request.except(['criado_por', 'criado_em', 'atualizado_em', 'atualizado_por'])
+      try {
+        const user = await User.findOrFail(params.id)
+  
+        const { setores, ...data } = request.except(['criado_por', 'criado_em', 'atualizado_em', 'atualizado_por'])
+  
+        const setores_ids = []
+        
+        for (let i = 0; i < setores.length; i++) {
+          const set = await Setor.findBy('nome', setores[i]) // Pegando o setor no banco de dados
+          setores_ids.push(set.id) // colocando o id do setor no array
+        }
+  
+        user.merge({ atualizado_por: auth.user.id, ...data }) //* Faz a modificação na planilha
+  
+        await user.setores().detach()
+        await user.setores().attach(setores_ids)
+  
+        
+        // await user.setores().saveMany(setores_ids)
+        
+        await user.save()
 
-      const setores_ids = []
-      
-      for (let i = 0; i < setores.length; i++) {
-        const set = await Setor.findBy('nome', setores[i]) // Pegando o setor no banco de dados
-        setores_ids.push(set.id) // colocando o id do setor no array
+      } catch(error) {
+        return response.status(400).send({ message: "Valores inválidos" })
       }
 
-      user.merge({ atualizado_por: auth.user.id, ...data }) //* Faz a modificação na planilha
-
-      await user.setores().detach()
-      await user.setores().attach(setores_ids)
-
-      
-      // await user.setores().saveMany(setores_ids)
-      
-      await user.save()
-
     }
-    async destroy({ params }) {
-      const user = await User.findOrFail(params.id)
+    async destroy({ params, response }) {
 
-      user.merge({ status: 'inativo'})
+      try {
+        const user = await User.findOrFail(params.id)
+  
+        user.merge({ status: 'inativo'})
+  
+        await user.save()
 
-      await user.save()
+      } catch(error) {
+        return response.status(400).send({ message: "Valores inválidos" })
+      }
 
     }
 

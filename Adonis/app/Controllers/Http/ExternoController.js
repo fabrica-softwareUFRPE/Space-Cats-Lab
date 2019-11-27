@@ -22,17 +22,10 @@ class ExternoController {
    */
   async index ({ request, response }) {
 
-    //* Não vamos listar todas as linhas da planilha de uma vez só
-    //* Para isto, vamos utilizar paginação
-    //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-
     try {
-      const { page } = request.only(["page"]) 
-  
       const planilha = await Database
       .table('externos')
       .orderBy('id', 'cresc')
-      .forPage(page, 10) //! Buscando em grupos de 10
   
       return planilha
 
