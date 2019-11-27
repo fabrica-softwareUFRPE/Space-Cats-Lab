@@ -18,12 +18,11 @@ const Route = use('Route')
 Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
     Route.put('/users/update/:id', 'UserController.update')
+    Route.get('users', 'UserController.indexUsers')
 }).middleware('auth');
 
 
 Route.post('/login', 'SessionController.login').validator('Login')
-
-Route.get('users', 'UserController.indexUsers')
 
 Route.patch('users/:id', 'UserController.destroy')
 
