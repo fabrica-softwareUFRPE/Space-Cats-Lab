@@ -16,7 +16,7 @@ class UserController {
         setores_ids.push(set.id) // colocando o id do setor no array
       }
       
-        const data = request.only(['username', 'email', 'password', 'id'])
+        const data = request.only(['username', 'email', 'password', 'id', 'nivel'])
 
         const user = await User.create(data)
         user.setores().attach(setores_ids)
