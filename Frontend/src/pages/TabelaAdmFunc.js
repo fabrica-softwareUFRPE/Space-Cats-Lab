@@ -14,27 +14,32 @@ export default function TabelaFuncionario( { history } ) {
 
     var nivel;
 
-    if(data.nivel === 1) {
+    if(data.funcao === '1') {
       nivel = "Administrador";
-    } else if (data.nivel === 2) {
+    } else if (data.funcao === '2') {
       nivel = "Supervisor";
     } else {
       nivel = "Básico";
     }
 
-    await api.post("/users/register", 
-    {
-      "id": data.id,
-      "username": data.nome,
-      "email": data.email,
-      "password": data.senha,
-      "setores": [data.setor],
-      "nivel": nivel,
-    });
+    try {
+      await api.post("/users/register", 
+      {
+        "id": data.id,
+        "username": data.nome,
+        "email": data.email,
+        "password": data.senha,
+        "setores": [data.setor],
+        "nivel": nivel,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const [state, setState] = React.useState({
     columns: [
+      { tile: 'Id', field: 'id'},
       { title: 'Nome', field: 'nome'},
       { title: 'CPF', field: 'cpf'},
       { title: 'Email', field: 'email'},
@@ -52,9 +57,9 @@ export default function TabelaFuncionario( { history } ) {
       },
     ],
     data: [
-      { nome: 'Eduardo 0', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas P', funcao: 1, estado: 1 },
-      { nome: 'Eduardo 1', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas G', funcao: 1, estado: 1 },
-      { nome: 'Eduardo 2', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas S', funcao: 1, estado: 1 }, 
+      { id: '12', nome: 'Eduardo 0', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas P', funcao: 1, estado: 1 },
+      { id: '14', nome: 'Eduardo 1', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas G', funcao: 1, estado: 1 },
+      { id: '15', nome: 'Eduardo 2', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas S', funcao: 1, estado: 1 }, 
     ],
   });
   
