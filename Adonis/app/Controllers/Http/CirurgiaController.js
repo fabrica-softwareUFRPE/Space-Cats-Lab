@@ -23,19 +23,13 @@ class CirurgiaController {
    */
   async index ({ request, response }) {
 
-    //* Não vamos listar todas as linhas da planilha de uma só vez
-    //* Para isto, vamos utilizar paginação
-    //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
-
     try {
-      
-      const { page, tipo_animal } = request.only(["page", "tipo_animal"]) 
+      const { tipo_animal } = request.only(["tipo_animal"]) 
   
       const planilha = await Database
       .table('cirurgias')
       .orderBy('id', 'cresc')
       .where('tipo_animal', tipo_animal)
-      .forPage(page, 10) //! Buscando em grupos de 10
   
       return planilha
 
