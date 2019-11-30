@@ -31,26 +31,12 @@ class User extends Model {
       return 'atualizado_em'
     }
 
-    static nivelId(nivel) {
-
-      if (nivel === 'administrador') {
-        return 1
-
-      } else if (nivel === 'supervisor') {
-        return 2
-
-      } else {
-        return 3
-      }
-
-    }
-
     static verificaCriador(user_logado, user_alvo, nivel) {
 
       if (user_logado.nivel === 'administrador') {
         return true
 
-      } else if ( (user_logado.id === user_alvo.criado_por) && (nivel !== 'administrador') ) {
+      } else if ( (user_logado.id === user_alvo.criado_por) && (user_logado.nivel === 'supervisor') && (nivel === 'basico') && (user_alvo.nivel === 'basico') ) {
         return true
 
       } else {
