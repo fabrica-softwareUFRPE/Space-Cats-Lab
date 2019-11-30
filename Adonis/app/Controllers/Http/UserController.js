@@ -2,11 +2,13 @@
 
 const User = use('App/Models/User')
 const Setor = use('App/Models/Setor')
+const Database = use('Database')
 //const Database = use('Database')
 
 class UserController {
-
-    async register({ request }) {
+    //TODO Impedir supervisor de criar usuários administradores
+    //TODO Impedir supervisor de criar usuários administradores
+    async register({ request, auth }) {
       const { setores } = request.all()
 
       const setores_ids = []
@@ -18,8 +20,31 @@ class UserController {
       
         const data = request.only(['username', 'email', 'password', 'id', 'nivel'])
 
-        const user = await User.create(data)
+        const user = await User.create({ criado_por: auth.user.id, ...data })
         user.setores().attach(setores_ids)
+
+        const { nivel } = data
+
+        //const nivelId = User.nivelId(nivel)
+      
+        const role = await Database
+        .table('roles')
+        .where('name', nivel)
+        .first()
+      
+        /*
+        if (nivel === 'administrador') {
+          await user.roles().attach([1])
+          
+        } else if (nivel === 'supervisor') {
+          await user.roles().attach([2])
+  
+        } else {
+          return 3
+        }
+        */
+
+        await user.roles().attach([role.id])
 
         return user
     }
@@ -61,9 +86,18 @@ class UserController {
 
     async update({ params, request, auth, response }) {
 
+      
       try {
         const user = await User.findOrFail(params.id)
-  
+
+        const { nivel } = request.all()
+        
+        const bool = await User.verificaCriador(auth.user, user, nivel)
+
+        if (await bool === false) {
+          return response.status(400).send({ message: "Você não pode atualizar este usuário" })
+        }
+        
         const { setores, ...data } = request.except(['criado_por', 'criado_em', 'atualizado_em', 'atualizado_por'])
   
         const setores_ids = []

@@ -16,10 +16,10 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 Route.group(() => {
-    Route.post('users/register', 'UserController.register').validator('StoreUser')
-    Route.put('/users/update/:id', 'UserController.update')
-    Route.get('users', 'UserController.indexUsers')
-}).middleware('auth');
+    Route.post('users/register', 'UserController.register').validator('StoreUser').middleware(['auth', 'is:!basico'])
+    Route.put('/users/update/:id', 'UserController.update').middleware(['auth', 'is:!basico'])
+    Route.get('users', 'UserController.indexUsers').middleware('auth')
+})//.middleware('auth');
 
 
 Route.post('/login', 'SessionController.login').validator('Login')
