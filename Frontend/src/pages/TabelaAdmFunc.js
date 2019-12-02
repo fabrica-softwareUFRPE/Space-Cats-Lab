@@ -2,42 +2,68 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
 import Button from '@material-ui/core/Button';
+import api from "../services/api";
 
 
+export default function TabelaFuncionario( { history } ) {
+  function exitFunction (e) {
+    history.push('/');
+  }
 
-export default function TabelaFuncionario() {
+  async function newUser ( data ) {
+
+    var nivel;
+
+    if(data.funcao === '1') {
+      nivel = "Administrador";
+    } else if (data.funcao === '2') {
+      nivel = "Supervisor";
+    } else {
+      nivel = "Básico";
+    }
+
+    try {
+      await api.post("/users/register", 
+      {
+        "id": data.id,
+        "username": data.nome,
+        "email": data.email,
+        "password": data.senha,
+        "setores": [data.setor],
+        "nivel": nivel,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Nome', field: 'nome' },
-      { title: 'Login', field: 'login'},
-      { title: 'Senha', field: 'senha'},
+      { tile: 'Id', field: 'id'},
+      { title: 'Nome', field: 'nome'},
+      { title: 'CPF', field: 'cpf'},
       { title: 'Email', field: 'email'},
+      { title: 'Senha', field: 'senha'},
+      { title: 'Setor', field: 'setor'},
       {
-	    title: 'Função',
+	      title: 'Função',
         field: 'funcao',
-        lookup: { 1: 'Administrador(a)', 2: 'Professor', 3:"Residente" },
+        lookup: { 1: 'Administrador(a)', 2: 'Supervisor', 3: 'Básico' },
+      },
+      {
+        title: 'Estado',
+        field: 'estado',
+        lookup: { 1: 'Ativo', 2: 'Inativo' },
       },
     ],
     data: [
-      { nome: 'Eduardo 0', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 1', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 2', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 3', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 4', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 5', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 6', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 7', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 8', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      { nome: 'Eduardo 9', login: 'PCEdu42', senha: 123456789, email: 'Eduardogomes42@hotmail.com', funcao: 1 },
-      
-           
+      { id: '12', nome: 'Eduardo 0', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas P', funcao: 1, estado: 1 },
+      { id: '14', nome: 'Eduardo 1', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas G', funcao: 1, estado: 1 },
+      { id: '15', nome: 'Eduardo 2', cpf: '12345678910', email: 'Eduardogomes42@hotmail.com', senha: 123456789, setor: 'Consultas S', funcao: 1, estado: 1 }, 
     ],
   });
   
   return (
-
-
-
 
     <div className = 'tela-adm'  >
 
@@ -47,35 +73,71 @@ export default function TabelaFuncionario() {
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
 
-      <div className="sideBar">
-        <div className="headDiv">
-            <p><center>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</center></p>
-            <p>USERNAME</p>
-        </div>
-        <div className="naviDiv">
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Gerenciar Usuários</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Consultas e Retornos</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Diagnóstico por Imagem</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Procedimentos Cirúrgicos</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Procedimentos Anestésicos</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Análises Laboratoriais</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Necropsias</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Atendimentos Externos</button>
-            <div className="naviLine"/>
-            <button className="naviButton" id="naviButton1">Imprimir Relatório Mensal</button>
-            <div className="naviLine"/>
-        </div>
-        <div className="exitDiv">
-            <button id="exitButton">Sair</button>
-        </div>
+        <div className="sideBar">
+          <div className="headDiv">
+              <center><p>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</p></center>
+              <p>USERNAME</p>
+          </div>
+          <div className="naviDiv">
+              <ul>
+                  <li><div className="naviLine"/></li>
+                  <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
+                  <li><div className="naviLine"/></li>
+                  <div className="dropDown">
+                      <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
+                          <ul>
+                              <li><button className="naviButtonCascade">para Pequenos Animais</button></li>
+                              <li><button className="naviButtonCascade">para Grandes Animais</button></li>
+                              <li><button className="naviButtonCascade">para Animais Silvestres</button></li>
+                          </ul>
+                      </li>
+                  </div>
+                  <li><div className="naviLine"/></li>
+                  <li><button className="naviButton" id="naviButton3">Diagnóstico por Imagem</button></li>
+                  <li><div className="naviLine"/></li>
+                  <div className="dropDown">
+                      <li><button className="naviButton" id="naviButton4">Procedimentos Cirúrgicos</button>
+                          <ul>
+                              <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
+                              <li><button className="naviButtonCascade">em Grandes Animais</button></li>
+                              <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                          </ul>
+                      </li>
+                  </div>
+                  <li><div className="naviLine"/></li>
+                  <div className="dropDown">
+                  <li><button className="naviButton" id="naviButton5">Procedimentos Anestésicos</button>
+                      <ul>
+                          <li><button className="naviButtonCascade">em Pequenos Animais</button></li>
+                          <li><button className="naviButtonCascade">em Grandes Animais</button></li>
+                          <li><button className="naviButtonCascade">em Animais Silvestres</button></li>
+                      </ul>
+                  </li>
+                  </div>
+                  <li><div className="naviLine"/></li>
+                  <div className="dropDown">
+                  <li><button className="naviButton" id="naviButton6">Análises Laboratoriais</button>
+                      <ul>
+                          <li><button className="naviButtonCascade">Bacteriose/Virose/Micológico</button></li>
+                          <li><button className="naviButtonCascade">Parasitas</button></li>
+                          <li><button className="naviButtonCascade">Patologia Clínica</button></li>
+                          <li><button className="naviButtonCascade">Patologia Veterinária</button></li>
+                          <li><button className="naviButtonCascade">Reprodução</button></li>
+                      </ul>
+                  </li>
+                  </div>
+                  <li><div className="naviLine"/></li>
+                  <li><button className="naviButton" id="naviButton7">Necropsias</button></li>
+                  <li><div className="naviLine"/></li>
+                  <li><button className="naviButton" id="naviButton8">Atendimentos Externos <br></br>a Grandes Animais</button></li>
+                  <li><div className="naviLine"/></li>
+                  <li><button className="naviButton" id="naviButton9">Imprimir Relatório Mensal</button></li>
+                  <li><div className="naviLine"/></li>
+              </ul>
+          </div>
+          <div className="exitDiv">
+              <button id="exitButton" onClick={exitFunction}>Sair</button>
+          </div>
       </div>
 
 
@@ -100,6 +162,7 @@ export default function TabelaFuncionario() {
                     setState(prevState => {
                       const data = [...prevState.data];
                       data.push(newData);
+                      newUser(newData);
                       return { ...prevState, data };
                     });
                   }, 600);
@@ -111,6 +174,7 @@ export default function TabelaFuncionario() {
                     if (oldData) {
                       setState(prevState => {
                         const data = [...prevState.data];
+                        //console.log(data.indexOf(oldData));
                         data[data.indexOf(oldData)] = newData;
                         return { ...prevState, data };
                       });

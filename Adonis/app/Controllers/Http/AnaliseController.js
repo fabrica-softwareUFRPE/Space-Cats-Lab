@@ -27,22 +27,37 @@ class AnaliseController {
     //* Para isto, vamos utilizar paginação
     //* O atributo page nos fornece a numeração da página atual (1, 2, 3 ...)
 
-    try {
+    // try {
       
-      const { page, analise_tipo } = request.only(["page", "analise_tipo"]) 
+    //   const { page, analise_tipo } = request.only(["page", "analise_tipo"]) 
   
+    //   const planilha = await Database
+    //   .table('analises')
+    //   .orderBy('id', 'cresc')
+    //   .where('analise_tipo', analise_tipo)
+    //   .forPage(page, 10) //! Buscando em grupos de 10
+  
+    //   return planilha
+
+    // } catch(error) {
+
+    //   return response.status(400).send({ message: "Valores inválidos1" })
+    // }
+    try {
+      const { analise_tipo } = request.only(["analise_tipo"]) 
+    
       const planilha = await Database
-      .table('analises')
-      .orderBy('id', 'cresc')
-      .where('analise_tipo', analise_tipo)
-      .forPage(page, 10) //! Buscando em grupos de 10
+        .table('analises')
+        .orderBy('id', 'cresc')
+        .where('analise_tipo', analise_tipo)
   
-      return planilha
+      return planilha  
 
     } catch(error) {
-
       return response.status(400).send({ message: "Valores inválidos1" })
     }
+
+
 
   }
   /**

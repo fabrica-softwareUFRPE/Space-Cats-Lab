@@ -19,7 +19,8 @@ class StoreUser {
   get rules () {
     return {
       // validation rules
-      id:'required|unique:users|validarCpf ',
+      // id:'required|unique:users|validarCpf ',
+      id:'required|unique:users',
       username:'required  ',
       email: 'required|email|unique:users ',
       password: 'required',

@@ -8,16 +8,12 @@ body {
     display: flex;
     background-image: url("..//assets/bgLogin.svg");
     background-size: cover;
-    background-position: 16vw;
-   
-    
- 
-       
+    background-position: 16vw;  
 }
 
+/* Tudo daqui pra baixo diz respeito ao CSS da Sidebar */
 
-
-.sideBar {
+.tela-adm .sideBar {
     width: 16vw;
     height: 100%;
     display: flex;
@@ -27,9 +23,10 @@ body {
     background-color: #1D5047;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     font-size: 1vw;
+    z-index: 2;
 }
 
-.sideBar #exitButton {
+.tela-adm .sideBar #exitButton {
     padding: 0.8vh;
     border: 0;
     border-radius: 3px;
@@ -41,7 +38,7 @@ body {
     align-items: center;
 }
 
-.sideBar .headDiv {
+.tela-adm .sideBar .headDiv {
     width: 100%;
     height: 20vh;
     display: flex;
@@ -51,7 +48,7 @@ body {
     color: #f5f5f5;
 }
 
-.sideBar .naviDiv {
+.tela-adm .sideBar .naviDiv {
     width: 100%;
     height: 70vh;
     display: flex;
@@ -60,7 +57,33 @@ body {
     align-items: center;
     color: #f5f5f5;
 }
-.sideBar .exitDiv {
+
+.tela-adm .sideBar .naviDiv ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tela-adm .sideBar .naviDiv ul li {
+    position: relative;
+}
+
+.tela-adm .sideBar .naviDiv ul li ul {
+    position: absolute;
+    left: 16vw;
+    top: 0;
+    display: none;
+}
+
+.tela-adm .sideBar .naviDiv ul li:hover ul {
+    display: block;
+}
+
+.tela-adm .sideBar .exitDiv {
     width: 100%;
     height: 10vh;
     display: flex;
@@ -69,13 +92,13 @@ body {
     align-items: center;
 }
 
-.sideBar .naviLine {
+.tela-adm .sideBar .naviLine {
     height: 0.11vh;
     width: 12vw;
-    background-color: #f5f5f557;
+    background-color: #9e9e9e;
 }
 
-.sideBar .naviButton {
+.tela-adm .sideBar .naviButton {
     padding: 2.5vh;
     border: 0;
     width: 16vw;
@@ -86,6 +109,32 @@ body {
     cursor: pointer;
     align-items: center;
 }
+
+.tela-adm .sideBar .dropDown:hover .naviButton {
+    background-color: rgb(36, 102, 90);
+}
+
+.tela-adm .sideBar .naviButton:hover {
+    background-color: rgb(36, 102, 90);
+}
+
+.tela-adm .sideBar .naviButtonCascade {
+    padding: 2.5vh;
+    border: 0;
+    width: 12vw;
+    font-size: 0.8vw;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    background-color: #ececec;
+    cursor: pointer;
+    align-items: center;
+}
+
+.tela-adm .sideBar .naviButtonCascade:hover {
+    background-color: #cccccc;
+}
+
+/* Tudo daqui pra cima diz respeito ao CSS da Sidebar */
 
 .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
     

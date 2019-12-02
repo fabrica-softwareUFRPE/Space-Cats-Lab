@@ -10,8 +10,33 @@ import {
 
 export default function TabelaAnalisesLabBac() {
 
-  
+  /*
+   async function newAnaliseLab ( data ) {
 
+    var nivel;
+
+    if(data.funcao === '1') {
+      nivel = "simples";
+    } else if (data.funcao === '2') {
+      nivel = "complexo";
+    }
+    try {
+      //await api.post("/users/register", 
+      {
+        "n": data.n,
+        "data": data.data,
+        "ID": data.ID,
+        "Nome": data.Nome,
+        "Especie": data.Especie,
+        "Tecnicas": data.Tecnicas,
+        "procedimento": [data.procedimento],
+        "nivel": nivel,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+*/
   
   const [state, setState] = React.useState({
     columns: [
