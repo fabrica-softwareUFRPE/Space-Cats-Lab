@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
-import api from "../services/app";
+import api from "../services/api";
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import {

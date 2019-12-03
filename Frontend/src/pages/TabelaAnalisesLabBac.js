@@ -1,7 +1,7 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
-import api from "../services/app";
+import api from "../services/api";
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -105,7 +105,7 @@ function atendimentoExt(e){
         "especie": data.Especie,
         "procedimentos": data.Tecnicas,
         "procedimento": [data.procedimento],
-        "proce": nivel,
+        "proce": procedimento,
       });
     } catch (err) {
       console.log(err);

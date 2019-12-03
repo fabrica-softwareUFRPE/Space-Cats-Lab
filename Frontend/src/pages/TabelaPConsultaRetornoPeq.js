@@ -2,7 +2,7 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
 import Button from '@material-ui/core/Button';
-
+import api from "../services/api";
 
 
 export default function TabelaConsultaPeq({ history }) {
@@ -92,21 +92,21 @@ async function newConsultaRetornoPeq ( data ) {
   }
   try {
     await api.post("/Planilhas/Anestesias", 
-    {/*
+    {
       "data_proc": data.data,
       "animal_id": data.idetificacao,
       "nome": data.nome,
       "especie": data.specie,
       "area" :   data.area,
       "tipo_proc": data.tipo_proc ,
-    	"caso_novo": ,
-    	"retorno": ,
-	    "tipo_animal": ,
-    	"criado_por": ,
+    	"caso_novo": null,
+    	"retorno": null ,
+	    "tipo_animal": null ,
+    	"criado_por": null ,
       "procedimentos": data.Tecnicas,
       "procedimento": [data.procedimento],
-      "proce": nivel,
-    */});
+      "proce": procedimento,
+    });
   } catch (err) {
     console.log(err);
   }
