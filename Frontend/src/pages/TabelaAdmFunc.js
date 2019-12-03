@@ -151,7 +151,7 @@ export default function TabelaFuncionario( { history } ) {
                 width:  1,
                 //backgroundColor: '#fff',
               }
-            }}
+         }}
             columns={state.columns}
             data={state.data}
             editable={{
