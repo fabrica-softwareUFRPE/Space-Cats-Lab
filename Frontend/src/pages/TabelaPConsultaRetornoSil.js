@@ -81,7 +81,13 @@ function analisesLabRep(e){
 function atendimentoExt(e){
     history.push('/tableAtendimentoExterno')
 }
-async function newConsultaRetornoPeq ( data ) {
+async function lerTabela(data){
+
+  await api.get ("/Planilhas/Consultas")
+
+}
+
+async function newTabelaRetornoGra ( data ) {
 
   var procedimento;
 
@@ -91,26 +97,24 @@ async function newConsultaRetornoPeq ( data ) {
     procedimento = "complexo";
   }
   try {
-    await api.post("/Planilhas/Anestesias", 
+    await api.post("/Planilhas/Consultas", 
     {
+      
       "data_proc": data.data,
       "animal_id": data.idetificacao,
       "nome": data.nome,
       "especie": data.specie,
       "area" :   data.area,
       "tipo_proc": data.tipo_proc ,
-    	"caso_novo": null ,
-    	"retorno": null,
-	    "tipo_animal":null ,
-    	"criado_por":null ,
-      "procedimentos": data.Tecnicas,
-      "procedimento": [data.procedimento],
-      "proce": procedimento,
+    	"caso_novo": data.casos,
+    	"retorno": data.retorno,
+	    "tipo_animal": null ,
     });
   } catch (err) {
     console.log(err);
   }
 }
+
 
   const [state, setState] = React.useState({
     columns: [
@@ -129,9 +133,7 @@ async function newConsultaRetornoPeq ( data ) {
       
     ],
     data: [
-      { n: '0', data: '21/09/2019', idetificacao: '0', nome: 'paciente 0', 
-      especie: 'gato', area: 'clinica medica' , simples: '1', funcao:1, retorno: '01/12/2019' },
-      
+      lerTabela(data); 
     ],
   });
   
@@ -147,7 +149,7 @@ async function newConsultaRetornoPeq ( data ) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
-<div className="sideBar">
+                <div className="sideBar">
                 <div className="headDiv">
                     <center><p>SAC-FORDHOV<br/>Hospital Veterinário UFRPE</p></center>
                     <p>USERNAME</p>
@@ -236,6 +238,7 @@ async function newConsultaRetornoPeq ( data ) {
                     setState(prevState => {
                       const data = [...prevState.data];
                       data.push(newData);
+                      newTabelaRetornoGra(newData);
                       return { ...prevState, data };
                     });
                   }, 600);

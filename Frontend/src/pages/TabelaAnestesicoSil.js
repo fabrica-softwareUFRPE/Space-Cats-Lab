@@ -86,31 +86,30 @@ function atendimentoExt(e){
 }
 
 
-  async function newAnaliseLab ( data ) {
+async function newAnestesicoSil  ( data ) {
 
-    var nivel;
+  var nivel;
 
-    if(data.funcao === '1') {
-      nivel = "simples";
-    } else if (data.funcao === '2') {
-      nivel = "complexo";
-    }
-    try {
-      await api.post("/users/register", 
-      {
-        "n": data.n,
-        "data": data.data,
-        "ID": data.ID,
-        "Nome": data.Nome,
-        "Especie": data.Especie,
-        "Tecnicas": data.Tecnicas,
-        "procedimento": [data.procedimento],
-        "nivel": nivel,
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  if(data.funcao === '1') {
+    nivel = "simples";
+  } else if (data.funcao === '2') {
+    nivel = "complexo";
   }
+  try {
+    await api.post("/Planilhas/Anestesia", 
+    {
+      "data_proc": data.n,
+      "animal_id": data.ID,
+      "nome": data.nome,
+      "especie": data.especie,
+      "tecnicas": data.tecnicas,
+      "tipo_proc": data.nivel,
+      "tipo_animal": null,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
   
   const [state, setState] = React.useState({
@@ -239,6 +238,7 @@ function atendimentoExt(e){
                     setState(prevState => {
                       const data = [...prevState.data];
                       data.push(newData);
+                      newAnestesicoSil(newData);
                       return { ...prevState, data };
                     });
                   }, 600);

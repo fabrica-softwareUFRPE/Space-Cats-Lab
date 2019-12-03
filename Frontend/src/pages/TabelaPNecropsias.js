@@ -88,22 +88,19 @@ async function newNecropsias ( data ) {
   var nivel;
 
   if(data.funcao === '1') {
-    nivel = "simples";
+    nivel = "Até 100Kg";
   } else if (data.funcao === '2') {
-    nivel = "complexo";
+    nivel = "+100Kg";
   }
   try {
     await api.post("/Planilhas/Necropsias", 
     {
-      "n": data.n,
-      "data": data.data,
+      "data_proc": data.data,
       "animal_id": data.ID,
-      "nome": data.Nome,
-      "especie": data.Especie,
-      "Tecnicas": data.Tecnicas,
-      "procedimento": [data.procedimento],
-      "nivel": nivel,
-    });
+      "nome": data.nome,
+      "especie": data.especie,
+      "peso": data.nivel,
+});
   } catch (err) {
     console.log(err);
   }

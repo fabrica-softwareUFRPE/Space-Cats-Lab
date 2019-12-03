@@ -81,7 +81,7 @@ function atendimentoExt(e){
     history.push('/tableAtendimentoExterno')
 }
 
-async function newConsultaRetornoPeq ( data ) {
+async function newTabelaRetornoGra ( data ) {
 
   var procedimento;
 
@@ -91,22 +91,19 @@ async function newConsultaRetornoPeq ( data ) {
     procedimento = "complexo";
   }
   try {
-    await api.post("/Planilhas/Anestesias", 
-    {/*
+    await api.post("/Planilhas/Consultas", 
+    {
+      
       "data_proc": data.data,
       "animal_id": data.idetificacao,
       "nome": data.nome,
       "especie": data.specie,
       "area" :   data.area,
       "tipo_proc": data.tipo_proc ,
-    	"caso_novo": ,
-    	"retorno": ,
-	    "tipo_animal": ,
-    	"criado_por": ,
-      "procedimentos": data.Tecnicas,
-      "procedimento": [data.procedimento],
-      "proce": nivel,
-    */});
+    	"caso_novo": data.casos,
+    	"retorno": data.retorno,
+	    "tipo_animal": null ,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -236,6 +233,7 @@ async function newConsultaRetornoPeq ( data ) {
                     setState(prevState => {
                       const data = [...prevState.data];
                       data.push(newData);
+                      newTabelaRetornoGra(newData);
                       return { ...prevState, data };
                     });
                   }, 600);

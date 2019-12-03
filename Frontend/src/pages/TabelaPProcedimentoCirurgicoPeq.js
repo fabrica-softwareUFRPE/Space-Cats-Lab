@@ -90,15 +90,16 @@ async function newCirurgiaPeq( data ) {
     nivel = "complexo";
   }
   try {
-    await api.post("/Planilhas/ProcedimentosCirurgicos", 
+    await api.post("/Planilhas/Cirurgias", 
     {
-      "data_proc": data.data ,
-      "animal_id": data.identificacao ,
+      "data_proc": data.data,
+      "animal_id": data.ID,
       "nome": data.nome,
       "especie": data.especie,
-      "procedimentos": ["x"],
-      "quant_simples":data.estudo ,
-      "quant_complexos": data.estudo ,
+      "procedimentos": data.nivel,
+      "quant_simples": null,
+      "quant_complexos": null,
+      "tipo_animal":null,
     });
   } catch (err) {
     console.log(err);

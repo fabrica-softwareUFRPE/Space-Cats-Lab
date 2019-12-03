@@ -80,6 +80,36 @@ function analisesLabRep(e){
 function atendimentoExt(e){
     history.push('/tableAtendimentoExterno')
 }
+async function newAtendExtgra  ( data ) {
+
+  var nivel;
+  var aux;
+  if(data.funcao === '1') {
+    nivel = "Rebanho";
+  } else if (data.funcao === '2') {
+    nivel = "Individual";
+  }
+
+  if(data.funcao === '1') {
+    nivel = "Até 100Km";
+  } else if (data.funcao === '2') {
+    nivel = "101 a 500Km";
+  }else{
+    nivel = "+500Km";
+  }
+  try {
+    await api.post("/Planilhas/Externo", 
+    {
+      "data_proc": data.n,
+      "animal_id": data.ID,
+      "propriedade": data.propriedade,
+      "dist_prop": data.nivel,
+      "tipo_atendimento": data.aux,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 
   const [state, setState] = React.useState({
@@ -203,6 +233,7 @@ function atendimentoExt(e){
                     setState(prevState => {
                       const data = [...prevState.data];
                       data.push(newData);
+                      newAtendExtgra(newData);
                       return { ...prevState, data };
                     });
                   }, 600);

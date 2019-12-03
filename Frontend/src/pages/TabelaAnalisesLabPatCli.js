@@ -85,8 +85,6 @@ function atendimentoExt(e){
     history.push('/tableAtendimentoExterno')
 }
 
-
-  /*
   async function newAnaliseLab ( data ) {
 
     var nivel;
@@ -97,22 +95,21 @@ function atendimentoExt(e){
       nivel = "complexo";
     }
     try {
-      await api.post("/users/register", 
+      await api.post("/Planilhas/Analises", 
       {
-        "n": data.n,
-        "data": data.data,
-        "ID": data.ID,
-        "Nome": data.Nome,
-        "Especie": data.Especie,
-        "Tecnicas": data.Tecnicas,
-        "procedimento": [data.procedimento],
-        "nivel": nivel,
+        "data_proc": data.n,
+        "animal_id": data.ID,
+        "nome": data.nome,
+        "especie": data.especie,
+        "tecnicas": data.tecnicas,
+        "tipo_proc": data.nivel,
+        "tipo_animal": null,
       });
     } catch (err) {
       console.log(err);
     }
   }
-*/
+
   
   const [state, setState] = React.useState({
     columns: [
@@ -122,7 +119,6 @@ function atendimentoExt(e){
       { title: 'Nome', field: 'Nome'},
       { title: 'Espécie', field: 'Especie'},
       { title: 'Técnicas Anestésicas', field: 'Tecnicas'},
-      
       {
 	    title: 'Tipo do procedimento',
         field: 'procedimento',
