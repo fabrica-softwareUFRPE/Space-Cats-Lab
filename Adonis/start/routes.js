@@ -19,7 +19,7 @@ Route.group(() => {
     Route.post('users/register', 'UserController.register').validator('StoreUser')
     Route.put('/users/update/:id', 'UserController.update')
     Route.get('users', 'UserController.indexUsers')
-}).middleware('auth');
+})//.middleware('auth');
 
 
 Route.post('/login', 'SessionController.login').validator('Login')

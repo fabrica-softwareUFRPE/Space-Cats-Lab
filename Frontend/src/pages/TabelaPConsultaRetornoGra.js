@@ -18,6 +18,12 @@ function consultaSilvestre(e){
     history.push('/tableConsultaSil');
 }
 
+function tabelaUsers(e){
+
+  history.push('/tableUsers')
+}
+
+
 function consultaPequeno (e) {
 
     history.push('/tableConsultaPeq');    
@@ -152,7 +158,7 @@ async function newTabelaRetornoGra ( data ) {
                 <div className="naviDiv">
                     <ul>
                         <li><div className="naviLine"/></li>
-                        <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
+                        <li><button className="naviButton" id="naviButton1" onClick={tabelaUsers}>Gerenciar Usuários</button></li>
                         <li><div className="naviLine"/></li>
                         <div className="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>

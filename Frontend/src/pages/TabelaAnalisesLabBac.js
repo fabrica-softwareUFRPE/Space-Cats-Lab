@@ -14,6 +14,12 @@ export default function TabelaAnalisesLabBac({ history }) {
     history.push('/');
 }
 
+function tabelaUsers(e){
+
+  history.push('/tableUsers')
+}
+
+
 function consultaGrande(e){
     history.push('/tableConsultaGra')
 }
@@ -159,7 +165,7 @@ function atendimentoExt(e){
                 <div className="naviDiv">
                     <ul>
                         <li><div className="naviLine"/></li>
-                        <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
+                        <li><button className="naviButton" id="naviButton1" onClick={tabelaUsers}>Gerenciar Usuários</button></li>
                         <li><div className="naviLine"/></li>
                         <div className="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>

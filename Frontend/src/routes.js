@@ -31,8 +31,7 @@ export default function Routes(){
         <BrowserRouter>
             <Route path = "/" exact component = {Login} />
             <Route path = "/home" component = {Home} isPrivate />
-            <Route path = "/table" component = {TabelaFuncionario} />
-            <Route path = "/tableusers" component = {ManageUsers} />
+            <Route path = "/tableUsers" component = {TabelaFuncionario} />
             <Route path = "/tableAnestesicoPeq" component = {TabelaAnestesicoPeq} />
             <Route path = "/tableAnestesicoGra" component = {TabelaAnestesicoGra} />
             <Route path = "/tableAnestesicoSil" component = {TabelaAnestesicoSil} />             

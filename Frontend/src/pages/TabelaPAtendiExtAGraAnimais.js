@@ -2,7 +2,7 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import './TabelaAdmFunc.css';
 import Button from '@material-ui/core/Button';
-
+import api from "../services/api";
 
 
 export default function TabelaAtendiGra({ history }) {
@@ -13,6 +13,12 @@ export default function TabelaAtendiGra({ history }) {
 function consultaGrande(e){
     history.push('/tableConsultaGra')
 }
+
+function tabelaUsers(e){
+
+  history.push('/tableUsers')
+}
+
 
 function consultaSilvestre(e){
     history.push('/tableConsultaSil');
@@ -152,7 +158,7 @@ async function newAtendExtgra  ( data ) {
                 <div className="naviDiv">
                     <ul>
                         <li><div className="naviLine"/></li>
-                        <li><button className="naviButton" id="naviButton1">Gerenciar Usuários</button></li>
+                        <li><button className="naviButton" id="naviButton1" onClick={tabelaUsers}>Gerenciar Usuários</button></li>
                         <li><div className="naviLine"/></li>
                         <div className="dropDown">
                             <li><button className="naviButton" id="naviButton2">Consultas e Retornos</button>
